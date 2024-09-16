@@ -1,4 +1,30 @@
 
+// import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+// import { Document } from 'mongoose';
+
+// @Schema()
+// export class Shipping extends Document {
+//   @Prop({ required: true })
+//   userId: string;
+
+//   @Prop({ required: true })
+//   details: string;
+
+//   @Prop({ required: true })
+//   phone: string;
+
+//   @Prop({ required: true })
+//   city: string;
+
+//   @Prop({ required: true })
+//   cartId: string; 
+
+// }
+
+// export const ShippingSchema = SchemaFactory.createForClass(Shipping);
+
+//-------------------------------------------------------------------
+//2
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
@@ -6,6 +32,9 @@ import { Document } from 'mongoose';
 export class Shipping extends Document {
   @Prop({ required: true })
   userId: string;
+
+  @Prop({ required: true })
+  email: string;  
 
   @Prop({ required: true })
   details: string;
