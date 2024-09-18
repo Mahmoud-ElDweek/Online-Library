@@ -11,13 +11,15 @@ import { AuthourizationService } from '../../services/users/authourization.servi
 import { Router, RouterLink, RouterOutlet } from '@angular/router'; // Import Router
 import { CookieService } from 'ngx-cookie-service';
 import { GetUserRecommendationService } from '../../services/recommendation/get-user-recommendation.service';
+import { TranslateModule } from "@ngx-translate/core";
+import { MyTranslateService } from "../../services/translation/my-translate.service";
 
 // Default values shown
 
 @Component({
   selector: "app-signin",
   standalone: true,
-  imports: [ReactiveFormsModule, NgIf, FormsModule, NgClass,RouterOutlet ,RouterLink],
+  imports: [ReactiveFormsModule, NgIf, FormsModule, NgClass,RouterOutlet ,RouterLink,TranslateModule],
   templateUrl: "./signin.component.html",
   styleUrls: ["./signin.component.scss"],
   providers: [CookieService],
@@ -31,6 +33,7 @@ export class SigninComponent {
     private _authourizationService: AuthourizationService,
     private router: Router,
     private cookieService: CookieService,
+    private _myTranslateService:MyTranslateService,
     @Inject(PLATFORM_ID) private platformId: Object,
     private _getUserRecommendationService:GetUserRecommendationService
   ) {}
@@ -133,6 +136,9 @@ export class SigninComponent {
     });
   }
 
+  changeLang(lang: string) {
+    this._myTranslateService.changLang(lang);
+  }
 }
 
 

@@ -9,6 +9,8 @@ import { isPlatformBrowser, NgClass } from '@angular/common';
 import { ConfirmationDialogComponent } from '../../components/confirmation-dialog/confirmation-dialog.component';
 import { BookByIdService } from '../../services/books/book-by-id.service';
 import { jwtDecode } from "jwt-decode";
+import { MyTranslateService } from '../../services/translation/my-translate.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 interface DecodedToken {
   userId: string; // أو اسم الحقل الذي يحتوي على الـ userId
@@ -19,7 +21,7 @@ interface DecodedToken {
 @Component({
   selector: 'app-book-details',
   standalone: true,
-  imports: [SubNavbarComponent,ReactiveFormsModule, NgClass,ConfirmationDialogComponent],
+  imports: [SubNavbarComponent,ReactiveFormsModule, NgClass,ConfirmationDialogComponent, TranslateModule],
   templateUrl: './book-details.component.html',
   styleUrl: './book-details.component.scss'
 }) 
@@ -59,7 +61,8 @@ export class BookDetailsComponent implements OnInit {
   })
 
 
-  constructor(private route: ActivatedRoute ,private _httpClient: HttpClient,private _reviewService:ReviewService,private _booksService:BooksService ,@Inject(PLATFORM_ID) platformId: object) {
+  constructor(private route: ActivatedRoute ,private _httpClient: HttpClient,private _reviewService:ReviewService,private _booksService:BooksService ,@Inject(PLATFORM_ID) platformId: object,
+private _myTranslateService:MyTranslateService) {
     // console.log(this.reviewForm.value);
     this.isBrowser = isPlatformBrowser(platformId);
     this.getUserIdFromTken()
@@ -300,5 +303,8 @@ export class BookDetailsComponent implements OnInit {
     this.showConfirmationDialog = false;
   }
 
+  changeLang(lang: string) {
+    this._myTranslateService.changLang(lang);
+  }
 }
   

@@ -9,6 +9,8 @@ import { AddToWishlistBtnComponent } from "../../components/add-to-wishlist-btn/
 import { AddToCartBtnComponent } from "../../components/add-to-cart-btn/add-to-cart-btn.component";
 import { ToastService } from '../../services/Toast/toast.service';
 import { CartCountService } from '../../services/cart/CartCount.service';
+import { MyTranslateService } from '../../services/translation/my-translate.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -18,7 +20,7 @@ import { CartCountService } from '../../services/cart/CartCount.service';
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrl:'./cart.component.scss',
-  imports: [
+  imports: [TranslateModule,
     CommonModule,
     ConfirmationDialogComponent,
     // AddToWishlistBtnComponent,
@@ -37,6 +39,7 @@ export class CartComponent implements OnInit {
     private _deleteBookFromCart:DeleteBookFromCartService,
     private _toastService:ToastService,
     private _cartCount:CartCountService,
+    private _myTranslateService:MyTranslateService,
     private router:Router) { }
 
   ngOnInit(): void {
@@ -129,7 +132,9 @@ export class CartComponent implements OnInit {
     this.router.navigate(['/books']);
   }
 
- 
+  changeLang(lang: string) {
+    this._myTranslateService.changLang(lang);
+  }
 
 
   // // Clear all items from the cart

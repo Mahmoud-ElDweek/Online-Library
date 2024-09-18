@@ -1,14 +1,17 @@
 import { NgClass, NgFor } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MyTranslateService } from '../../services/translation/my-translate.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-pagination',
   standalone: true,
-  imports: [NgFor,NgClass],
+  imports: [NgFor,NgClass, TranslateModule],
   templateUrl: './pagination.component.html',
   styleUrl: './pagination.component.scss'
 })
 export class PaginationComponent {
+  constructor(private _myTranslateService:MyTranslateService){ }
   @Input() currentPage!: number;
   @Input() totalPages!: number;
 
@@ -24,5 +27,7 @@ export class PaginationComponent {
       console.log('Page out of range:', newPage);
     }
   }
-  
+  changeLang(lang: string) {
+    this._myTranslateService.changLang(lang);
+  }
 }

@@ -67,16 +67,28 @@ export class AddToWishlistBtnComponent implements OnInit {
         .subscribe({
           next: () => {
             this.isWishlisted = false;
+            if(document.dir==='ltr'){
             this._toastService.showSuccess("Removed from wishlist.");
-          },
+          }
+          else{
+            this._toastService.showSuccess("تمت الازالة من المفضلة");
+          }}
+         
+          
+          ,
           error: (err) => console.log(err),
         });
     } else {
       this._addToWishListService.addToWishList(this.bookId).subscribe({
         next: () => {
           this.isWishlisted = true;
+          if(document.dir==='ltr'){
           this._toastService.showSuccess("Added to wishlist.");
-        },
+        }
+      else{
+        this._toastService.showSuccess("تمت الاضافة الي المفضلة ");
+      }
+      },
         error: (err) => console.log(err),
       });
     }

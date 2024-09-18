@@ -12,12 +12,14 @@ import { BooksGridListComponent } from "../../components/books-grid-list/books-g
 import { BooksListComponent } from "../../components/books-list/books-list.component";
 import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { PaginationComponent } from "../../components/pagination/pagination.component";
+import { MyTranslateService } from '../../services/translation/my-translate.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @Component({
   selector: 'app-books',
   standalone: true,
-  imports: [BookCardComponent, SubNavbarComponent, CommonModule, BooksGridListComponent, BooksListComponent, RouterLink, RouterLinkActive, PaginationComponent],
+  imports: [BookCardComponent, SubNavbarComponent, CommonModule, BooksGridListComponent, BooksListComponent, RouterLink, RouterLinkActive, PaginationComponent,TranslateModule],
 
   templateUrl: './books.component.html',
   styleUrls: ['./books.component.scss']
@@ -52,6 +54,7 @@ export class BooksComponent implements OnInit {
     private _categoryService: CategoryService,
     private _authorService: AuthorService,
     private _searchFilterBooksService: SearchFilterBooksService,
+    private _myTranslateService:MyTranslateService,
     private route: ActivatedRoute, private router: Router
 
   ) { }
@@ -246,5 +249,8 @@ export class BooksComponent implements OnInit {
         this.sortByHighToLow();
         break;
     }
+  }
+  changeLang(lang: string) {
+    this._myTranslateService.changLang(lang);
   }
 }

@@ -4,6 +4,8 @@ import { AddToCartServie } from "../../services/cart/AddToCart.service";
 import { ToastService } from "../../services/Toast/toast.service";
 import { CartCountService } from "../../services/cart/CartCount.service";
 import { isPlatformBrowser } from "@angular/common";
+import { dir } from "console";
+
 
 @Component({
   selector: "app-add-to-cart-btn",
@@ -41,8 +43,11 @@ export class AddToCartBtnComponent {
     this._addToCartService.addToCart(bookId).subscribe({
       next: (res) => {
         console.log(res);
+        
 
+        if(document.dir==='ltr'){
         if (res.message === "Book is already in the cart") {
+          
           this.message = "This book is already in your cart.";
           this._toastService.showError(this.message);
         } else if (res.message === "Book added to cart successfully") {
@@ -50,7 +55,20 @@ export class AddToCartBtnComponent {
           this.message = "Book added to cart successfully!";
           this._toastService.showSuccess(this.message);
         }
-       
+      }
+      
+      else if(document.dir==='rtl'){
+        if (res.message === "Book is already in the cart") {
+          this.message = "هذا الكتاب موجود بالفعل";
+          
+          this._toastService.showError(this.message);
+        } else if (res.message === "Book added to cart successfully") {
+          this._cartCount.updateNumOfCartItems(res.data.numOfCartItems);
+          this.message = "تم اضافة الكتاب الي السلة بنجاح";
+          this._toastService.showSuccess(this.message);
+        }
+
+      }
  
       },
       error: (err) => {
@@ -60,7 +78,8 @@ export class AddToCartBtnComponent {
       complete: () => {
         console.log("completed");
         console.log(this.message);
-      },
+      }
     });
   }
+
 }

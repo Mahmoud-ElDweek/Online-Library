@@ -2,18 +2,20 @@ import { Component, inject, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import { CartCountService } from '../../../services/cart/CartCount.service';
 import { WishListCountService } from '../../../services/wishlist/wish-list-count.service';
+import { TranslateModule } from '@ngx-translate/core';
+import { MyTranslateService } from '../../../services/translation/my-translate.service';
 
 @Component({
   selector: 'app-sub-navbar',
   standalone: true,
-  imports: [RouterLink,RouterLinkActive],
+  imports: [RouterLink,RouterLinkActive,TranslateModule],
   templateUrl: './sub-navbar.component.html',
   styleUrl: './sub-navbar.component.scss'
 })
 export class SubNavbarComponent implements OnInit{
   numOfCartItems: number = 0;  
   numOfWishlistItems:number=0;
-  constructor(private _cartCountService:CartCountService,private _wishlistCount:WishListCountService){
+  constructor(private _cartCountService:CartCountService,private _wishlistCount:WishListCountService, private _myTranslateService:MyTranslateService){
     this.calcTotalPrice()
     
   }
@@ -68,6 +70,8 @@ export class SubNavbarComponent implements OnInit{
   }
 
 
-
+  changeLang(lang: string) {
+    this._myTranslateService.changLang(lang);
+  }
   
 }

@@ -142,7 +142,7 @@
         <!-- First Column -->
         <div class="w-full lg:w-1/3 md:w-1/3 flex items-center">
           <ul class="flex">
-            <li>
+            <!-- <li>
               <select
                 id="select5"
                 class="bg-[#f9f9f9] dark:bg-[#0a0a0a] dark:border-white dark:dark:text-white p-2 rounded"
@@ -151,7 +151,18 @@
                 <option value="0">{{ item }}</option>
                 }
               </select>
+            </li> -->
+
+            <li>
+              <button
+                (click)="toggleLang()"
+                class="dark:text-white tracking-wider px-4 py-4 grid items-center justify-center transition-colors duration-300"
+              >
+              
+                {{ currentLang === 'en' ? 'العربية' : 'English' }}
+              </button>
             </li>
+            
             <li>
               <button
                 class="flex items-center dark:bg-[#0a0a0a] dark:dark:text-white p-3 rounded"
@@ -173,7 +184,7 @@
                 routerLinkActive="curved-div"
                 class="dark:text-white tracking-wider px-4 py-4 grid items-center justify-center transition-colors duration-300"
               >
-                Home
+                {{'navbar.Home'|translate}}
               </a>
             </li>
             <li>
@@ -182,7 +193,8 @@
                 routerLinkActive="curved-div"
                 class="dark:text-white tracking-wider px-4 py-4 grid place-items-center transition-colors duration-300"
               >
-                About Us
+              {{'navbar.About Us'|translate}}
+
               </a>
             </li>
             <li>
@@ -191,8 +203,8 @@
                 routerLinkActive="curved-div"
                 class="dark:text-white tracking-wider px-4 py-4 grid place-items-center transition-colors duration-300"
               >
-                Contact Us
-              </a>
+              {{'navbar.Contact Us'|translate}}
+            </a>
             </li>
             <li>
               <a
@@ -200,7 +212,7 @@
                 routerLinkActive="curved-div"
                 class="dark:text-white tracking-wider px-4 py-4 grid place-items-center transition-colors duration-300"
               >
-                Books
+              {{'navbar.Books'|translate}}
               </a>
             </li>
           </ul>
@@ -224,24 +236,24 @@
                   class="absolute right-0 top-full mt-2 w-48 bg-white dark:bg-gray-800 text-black dark:dark:text-white rounded-lg shadow-lg p-2 z-50"
                 >
                   <a
-                    routerLink="/settings"
+                    routerLink="/user-settings"
                     routerLinkActive="text-blue-800 bg-blue-700"
                     class="block p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300"
                   >
-                    <i class="fas fa-cog mr-2"></i> Settings
+                    <i class="fas fa-cog mr-2"></i> {{'navbar.Settings'|translate}}
                   </a>
                   <a
                     routerLink="/cart"
                     routerLinkActive="text-blue-800 bg-blue-100"
                     class="block p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300"
                   >
-                    <i class="fas fa-shopping-cart mr-2"></i> My Cart
+                    <i class="fas fa-shopping-cart mr-2"></i> {{'navbar.My Cart'|translate}}
                   </a>
                   <a
                     (click)="logout()"
                     class="block p-2 rounded cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300"
                   >
-                    <i class="fas fa-sign-out-alt mr-2"></i> Log Out
+                    <i class="fas fa-sign-out-alt mr-2"></i> {{"navbar.Log Out"|translate}}
                   </a>
                 </div>
               </div>
@@ -252,7 +264,7 @@
                 routerLinkActive="text-dark bg-[#f9f9f9] dark:text-white dark:bg-[#0e2134]"
                 class="dark:text-white px-4 py-5 transition-colors duration-300"
               >
-                <i class="fas fa-sign-in-alt mr-1"></i> Login
+                <i class="fas fa-sign-in-alt mr-1"></i> {{'navbar.Login'|translate}}
               </a>
             </li>
             <li *ngIf="!isLoggedIn">
@@ -261,7 +273,7 @@
                 routerLinkActive="text-white bg-slate-700 dark:bg-[#081828]"
                 class="dark:text-white px-3 py-5 rounded transition-colors duration-300"
               >
-                <i class="fas fa-user-plus mr-1"></i> Register
+                <i class="fas fa-user-plus mr-1"></i> {{'navbar.Register'|translate}}
               </a>
             </li>
           </ul>

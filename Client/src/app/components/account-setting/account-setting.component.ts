@@ -4,12 +4,14 @@ import { AbstractControl, FormControl, FormGroup , ReactiveFormsModule, Validato
 import { UserSettingsService } from '../../services/user-settings/user-settings.service';
 import { ConfirmationUpdateSettingsComponent } from '../confirmation-update-settings/confirmation-update-settings.component';
 import { Router } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { MyTranslateService } from '../../services/translation/my-translate.service';
 // import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-account-setting',
   standalone: true,
-  imports: [ReactiveFormsModule, ConfirmationUpdateSettingsComponent],
+  imports: [ReactiveFormsModule, ConfirmationUpdateSettingsComponent, TranslateModule],
   templateUrl: './account-setting.component.html',
   styleUrl: './account-setting.component.scss'
 })
@@ -46,7 +48,7 @@ export class AccountSettingComponent {
   }
 )
 
-constructor( @Inject(PLATFORM_ID) platformId: object ,private _userSettingsService: UserSettingsService){
+constructor( @Inject(PLATFORM_ID) platformId: object ,private _userSettingsService: UserSettingsService, private _myTranslateService:MyTranslateService){
   this.isBrowser = isPlatformBrowser(platformId);
   this.getPrfile()
 }
@@ -196,5 +198,9 @@ match(controlName: string, checkControlName: string): ValidatorFn {
 
   handleCancel(){
     this.showConfirmationDialog = false;
+  }
+
+  changeLang(lang: string) {
+    this._myTranslateService.changLang(lang);
   }
 }

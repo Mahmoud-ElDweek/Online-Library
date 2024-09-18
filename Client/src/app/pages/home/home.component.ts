@@ -12,6 +12,8 @@ import { AddBooksService } from '../../services/books/add-book.service';
 import { SubNavbarComponent } from '../../components/navbar/sub-navbar/sub-navbar.component';
 import { HttpClient } from '@angular/common/http';
 import { DarkModeService } from '../../services/dark-mode/dark-mode.service';
+import { MyTranslateService } from '../../services/translation/my-translate.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
@@ -23,7 +25,8 @@ import { DarkModeService } from '../../services/dark-mode/dark-mode.service';
     HeroSectionComponent,
     SwiperComponent,
     AuthorSwiperComponent,
-    SubNavbarComponent
+    SubNavbarComponent,
+    TranslateModule
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
@@ -55,7 +58,9 @@ export class HomeComponent {
   // ! Test add book (in form data)
   // selectedFile: File | null = null;  // لتخزين الملف المختار
 
-  constructor(private _booksService: BooksService , private _httpClient: HttpClient, private _darkModeService: DarkModeService){}
+  constructor(private _booksService: BooksService , private _httpClient: HttpClient, private _darkModeService: DarkModeService,
+    private _myTranslateService:MyTranslateService
+  ){}
 
   ngOnInit(): void {
     this.getBooks()
@@ -92,7 +97,9 @@ export class HomeComponent {
       }
     })
   }
-
+  changeLang(lang: string) {
+    this._myTranslateService.changLang(lang);
+  }
 
   // ! Test add book (in form data)
   // onFileSelected(event: any) {

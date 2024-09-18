@@ -4,13 +4,15 @@ import { CreateRecommendationService } from '../../services/recommendation/creat
 import { ToastService } from '../../services/Toast/toast.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { MyTranslateService } from '../../services/translation/my-translate.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-recommendation',
   standalone:true,
   templateUrl: './recommendation.component.html',
   styleUrls: ['./recommendation.component.scss'], // Tailwind CSS is used for styling
-  imports:[CommonModule]
+  imports:[CommonModule, TranslateModule]
 })
 export class RecommendationComponent implements OnInit {
   categories: any[] = [];
@@ -20,7 +22,8 @@ export class RecommendationComponent implements OnInit {
     private _getCateg: GetAllCategService,
     private _recommendationService: CreateRecommendationService , 
     private _toast:ToastService,
-    private router: Router
+    private router: Router,
+    private _myTranslateService:MyTranslateService
   ) {}
 
   ngOnInit(): void {
@@ -79,5 +82,8 @@ export class RecommendationComponent implements OnInit {
   
   skipSelections(): void {
     this.router.navigate(['/home']);
+  }
+  changeLang(lang: string) {
+    this._myTranslateService.changLang(lang);
   }
 }
