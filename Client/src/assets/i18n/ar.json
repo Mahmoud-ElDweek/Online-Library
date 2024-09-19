@@ -1,7 +1,7 @@
 {
     "navbar":{
         "Home":"الرئيسية",
-        "About Us":"عنا",
+        "About Us":"من نحن",
         "Contact Us":"تواصل معنا",
         "Books":"الكتب",
         "Settings":"الاعدادات",
@@ -280,6 +280,27 @@
         "Desc:":"الوصف:",
         "EGP":"جنيه"
         
+    },
+    "about":{
+        "About Us":"من نحن",
+        "Discover the world of Arabic and Islamic books, crafted to provide a unique reading experience.":"اكتشف عالم الكتب العربية والإسلامية، المصممة لتقديم تجربة قراءة فريدة.",
+        "Authentic Arabic Books":"كتب عربية أصلية",
+        "Our collection of Arabic books is curated from authentic sources, ensuring high-quality content for readers.":"مجموعة كتبنا العربية مختارة من مصادر أصلية، مما يضمن محتوى عالي الجودة للقراء.",
+        "Islamic Studies & Literature":"الدراسات الإسلامية والأدب",
+        "Explore a wide selection of Islamic books that cover religious studies, philosophy, and history.":"استكشف مجموعة واسعة من الكتب الإسلامية التي تغطي الدراسات الدينية والفلسفة والتاريخ.",
+        "Excellent Customer Service":"خدمة عملاء ممتازة",
+        "We are dedicated to providing top-notch customer service, ready to assist you with any inquiries.":"نحن ملتزمون بتقديم خدمة عملاء عالية الجودة، ومستعدون لمساعدتك في أي استفسار.",
+        "Secure Online Payment":"دفع إلكتروني آمن",
+        "Enjoy a seamless and secure online payment experience, ensuring your satisfaction with every purchase.":"استمتع بتجربة دفع إلكتروني سلسة وآمنة، مما يضمن لك الرضا مع كل عملية شراء."
+    },
+    "contact":{
+        "Get connected":"تواصل معنا",
+        "Lorem ipsum dolor sit amet, to the con adipiscing. Volutpat tempor to the condimentum vitae vel purus.":"لوريم إيبسوم دولور يجلس أميت، إلى يخدع adipiscing. Volutpat tempor إلى بهار السيرة الذاتية فيل بوروس.",
+        "Send Email":"إرسال بريد إلكتروني",
+        "Call Us":"اتصل بنا",
+        "Address":"العنوان",
+        "EL-Behera,Egypt":"محافظة البحيرة، مصر"
     }
+
 
 }

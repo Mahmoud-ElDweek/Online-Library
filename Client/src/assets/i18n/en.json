@@ -279,7 +279,26 @@
         "Category:":"Category:",
         "Desc:":"Desc:",
         "EGP":"EGP"
-
+    },
+    "about":{
+        "About Us":"About Us",
+        "Discover the world of Arabic and Islamic books, crafted to provide a unique reading experience.":"Discover the world of Arabic and Islamic books, crafted to provide a unique reading experience.",
+        "Authentic Arabic Books":"Authentic Arabic Books",
+        "Our collection of Arabic books is curated from authentic sources, ensuring high-quality content for readers.":"Our collection of Arabic books is curated from authentic sources, ensuring high-quality content for readers.",
+        "Islamic Studies & Literature":"Islamic Studies & Literature",
+        "Explore a wide selection of Islamic books that cover religious studies, philosophy, and history.":"Explore a wide selection of Islamic books that cover religious studies, philosophy, and history.",
+        "Excellent Customer Service":"Excellent Customer Service",
+        "We are dedicated to providing top-notch customer service, ready to assist you with any inquiries.":"We are dedicated to providing top-notch customer service, ready to assist you with any inquiries.",
+        "Secure Online Payment":"Secure Online Payment",
+        "Enjoy a seamless and secure online payment experience, ensuring your satisfaction with every purchase.":"Enjoy a seamless and secure online payment experience, ensuring your satisfaction with every purchase."
+    },
+    "contact":{
+        "Get connected":"Get connected",
+        "Lorem ipsum dolor sit amet, to the con adipiscing. Volutpat tempor to the condimentum vitae vel purus.":"Lorem ipsum dolor sit amet, to the con adipiscing. Volutpat tempor to the condimentum vitae vel purus.",
+        "Send Email":"Send Email",
+        "Call Us":"Call Us",
+        "Address":"Address",
+        "EL-Behera,Egypt":"EL-Behera,Egypt"
     }
 
 }
