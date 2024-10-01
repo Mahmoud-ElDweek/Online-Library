@@ -1,18 +1,19 @@
 import {
-    Controller,
-    Post,
-    Body,
-    Get,
-    Delete,
-    Patch,
-    UseGuards,
-    Req,
-  } from '@nestjs/common';
-  import { CartService } from './cart.service';
-  import { CartDTO, UpdateDTO } from './dto/cart.dto';
- 
-  import { AuthGuard } from 'src/core/guards/auth.guard';
+  Controller,
+  Post,
+  Body,
+  Get,
+  Delete,
+  Patch,
+  UseGuards,
+  Req,
+} from '@nestjs/common';
+import { CartService } from './cart.service';
+import { CartDTO, UpdateDTO } from './dto/cart.dto';
+
+import { AuthGuard } from 'src/core/guards/auth.guard';
 import { UserDTO } from '../wishlist/dto/wishlist.dto';
+
 import { Role } from 'src/core/EnumRoles/role.enum';
 import { Roles } from 'src/core/decorators/roles.decorator';
   
@@ -58,7 +59,7 @@ import { Roles } from 'src/core/decorators/roles.decorator';
     }
   
     @Delete('clear')
-    // @Roles(Role.User) commentAaaa
+    // @Roles(Role.User) 
     async clearCart(@Body() body: UserDTO,@Req() req:any) {
       body["userId"] = req.user.userId;
       return await this._cartService.clearCart(body);
