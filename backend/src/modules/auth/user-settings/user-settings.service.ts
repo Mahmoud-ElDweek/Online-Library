@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
+import { ForbiddenException, HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User } from 'src/core/schemas/user.schema';
@@ -6,8 +6,6 @@ import { PaginationDTO } from 'src/modules/book/bookdto/pagination.dto';
 import * as bcrypt from 'bcrypt';
 import { MailerService } from '@nestjs-modules/mailer';
 import emailHtml from '../mails/confirmPass';
-import * as fs from 'fs';
-import * as path from 'path';
 import { v2 as cloudinary } from 'cloudinary';
 
 @Injectable()
@@ -33,7 +31,7 @@ export class UserSettingsService {
         { lName: { $regex: name.trim(), $options: 'i' } }
       ];
   }
-    const total = await this.userModel.countDocuments(query).exec();
+    const total = await this.userModel.countDocuments().exec();
     const allUsers = await this.userModel
       .find(query)
       .limit(limit)
@@ -92,8 +90,11 @@ export class UserSettingsService {
         });
         // console.log(imgRes['secure_url']);
         body.profilePic = imgRes['secure_url'];
-      }else{
-        throw new HttpException('Fail, File Is Empty!', HttpStatus.BAD_REQUEST);
+      }
+
+      // if deleted image
+    if(!body.profilePic){
+      body.profilePic = '';
     }
 
     if (Array.isArray(body.fName)) {
@@ -110,6 +111,10 @@ export class UserSettingsService {
 
     if (Array.isArray(body.phone)) {
       body.phone = body.phone[body.phone.length - 1];
+    }
+
+    if (Array.isArray(body.profilePic)) {
+      body.profilePic = body.profilePic[body.profilePic.length - 1];
     }
 
     const updatedUser = await this.userModel.findByIdAndUpdate(userId, body, { new: true });
@@ -161,11 +166,19 @@ export class UserSettingsService {
       },
     });
 
-    return { message: 'Profile updated successfully' , updatedUser};
+    return { message: 'Password updated successfully' , updatedUser};
   }
 
 
   async deleteAccount(userId: string) {
+
+    const protectedAdminId = '66f9e34f28db096b6a2463aa';  
+
+    if (userId === protectedAdminId) {
+      return { message: "Cannot delete this protected admin" }
+
+    }
+
     const deletedUser = await this.userModel.findByIdAndDelete(userId)
 
     if (!deletedUser) throw new NotFoundException('User Not Found');
