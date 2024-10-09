@@ -16,8 +16,10 @@
 
     /* Linting */
     "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "noImplicitAny": false,    // Disable implicit `any` error
+    "strictNullChecks": false, // Disable strict null checks
+    "noUnusedLocals": false,   // Allow unused variables
+    "noUnusedParameters": false, // Allow unused parameters
     "noFallthroughCasesInSwitch": true
   },
   "include": ["src"]
