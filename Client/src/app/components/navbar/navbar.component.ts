@@ -34,8 +34,6 @@ export class NavbarComponent implements OnInit {
   isLoggedIn: boolean = false;
   username: string = "";
   isDropdownOpen = false;
-  isFadeIn = false;
-  isFadeOut = false;
   profileImage: string = "";
 
   languages: string[] = ["English", "العربية"];
@@ -79,9 +77,9 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  
-    this.toggleLang()
-    this.loadLang()
+    if(this.isBrowser){
+      this.loadLang()
+    }
   }
   // !get profile image when render navbar
   getProfilePicure() {
@@ -94,7 +92,7 @@ export class NavbarComponent implements OnInit {
         console.log(err);
       },
       complete: () => {
-        console.log("Update Profile Completed");
+        // console.log("Update Profile Completed");
       },
     });
   }
@@ -112,16 +110,8 @@ export class NavbarComponent implements OnInit {
   }
 
   toggleDarkMode() {
-    this.isFadeOut = true;
-
-    setTimeout(() => {
       this.isDarkMode = !this.isDarkMode;
-      this.isFadeOut = false;
-      this.isFadeIn = false;
-
-      this.isFadeIn = true;
-    }, 400);
-    localStorage.setItem("darkMode", this.isDarkMode ? "dark" : "light");
+    // localStorage.setItem("darkMode", this.isDarkMode ? "light" : "dark");
     this._darkModeService.toggleDarkMode(this.isDarkMode ? "dark" : "light");
   }
 
@@ -161,10 +151,3 @@ export class NavbarComponent implements OnInit {
     this._myTranslateService.changLang(lang);
   }
 }
-
-// Darkmode without animation
-// toggleDarkMode() {
-//   this.isDarkMode = !this.isDarkMode; // Toggle the dark mode state
-//   localStorage.setItem("darkMode", this.isDarkMode ? "dark" : "light"); // Save to localStorage
-//   this._darkModeService.toggleDarkMode(this.isDarkMode ? "dark" : "light"); // Notify the dark mode service
-// }

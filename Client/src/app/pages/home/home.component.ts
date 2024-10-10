@@ -54,8 +54,6 @@ export class HomeComponent implements OnInit {
   topRatingBooks: BookInterface[] = [];
   newBooks: BookInterface[] = [];
   book!: BookInterface;
-  // sortFor: string = 'averageRating';
-  // sortBy: string = 'asc';
   categories: CategoryInterface[] = [];
   authors: any = [];
 
@@ -79,9 +77,6 @@ export class HomeComponent implements OnInit {
     this.isBrowser = isPlatformBrowser(platformId);
   }
 
-  changeLang(lang: string) {
-    this._myTranslateService.changLang(lang);
-  }
 
   ngOnInit(): void {
     this.checkTokenAndFetchBooks();
@@ -236,5 +231,9 @@ export class HomeComponent implements OnInit {
         console.log("Get authors completed.");
       },
     });
+  }
+
+  changeLang(lang: string) {
+    this._myTranslateService.changLang(lang);
   }
 }

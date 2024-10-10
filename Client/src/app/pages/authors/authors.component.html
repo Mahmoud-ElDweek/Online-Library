@@ -36,9 +36,9 @@
         />
       </div>
       <div class="relative col-span-12 md:col-span-8 h-52 flex align-middle">
-        <div class="py-4 content ">
+        <div class="py-4 content my-auto">
             <h2 class="text-xl font-semibold dark:text-white">{{ author.name }}</h2>
-            <p class="text-gray-600 dark:text-gray-300 h-[120px] line-clamp-5 text-ellipsis overflow-hidden">{{ author.bio }}</p>
+            <p class="text-gray-600 dark:text-gray-300  line-clamp-5">{{ author.bio }}</p>
             <button
             (click)="selectAuthor(author._id)"
             class="block ms-auto bg-dark-700 text-text-forDark dark:text-text-primary dark:bg-light-300 my-2 py-2 px-4 rounded-lg hover:bg-red-600 dark:hover:bg-red-600 dark:hover:text-text-forDark"

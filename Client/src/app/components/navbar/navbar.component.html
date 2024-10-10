@@ -3,8 +3,6 @@
   [ngClass]="{
     'dark-mode': isDarkMode,
     'light-mode': !isDarkMode,
-    'fade-in': isFadeIn,
-    'fade-out': isFadeOut
   }"
 >
   <div class="topbar bg-light-300 dark:bg-dark-900">
@@ -26,8 +24,11 @@
                 class="flex items-center dark:dark:text-white p-3 rounded"
                 (click)="toggleDarkMode()"
               >
-                <i class="fa-solid fa-sun text-xl" *ngIf="!isDarkMode"></i>
-                <i class="fa-solid fa-moon text-xl" *ngIf="isDarkMode"></i>
+              @if (isDarkMode) {
+                <i class="fa-solid fa-sun text-xl"></i>
+              }@else {
+                <i class="fa-solid fa-moon text-xl"></i>
+              }
               </button>
             </li>
           </ul>

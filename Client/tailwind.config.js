@@ -4,6 +4,16 @@ module.exports = {
   darkMode: 'class', // Enable dark mode by adding the 'dark' class
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['El Messiri', 'ui-sans-serif', 'system-ui'],
+      },
+      fontWeight: {
+        thin: 300,
+        normal: 400,
+        medium: 500,
+        semiBold: 600,
+        bold: 700,
+      },
       boxShadow: {
         'custom': '0 6px 20px 0 rgba(0, 0, 0, 0.19)', 
       },
