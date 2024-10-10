@@ -11,6 +11,7 @@ import { MailerService } from '@nestjs-modules/mailer';
 import { HttpService } from '@nestjs/axios';
 import resetMail from '../mails/reset-password';
 import * as dotenv from 'dotenv';
+import { angular_apiUrl } from 'src/core/utils/frontApi.util';
 dotenv.config();
 @Injectable()
 export class SigninService {
@@ -75,7 +76,7 @@ export class SigninService {
     user.resetTokenExpiresAt = expiresAt;
     await user.save();
 
-    const resetLink = `http://localhost:4200/reset-password?token=${resetToken}`;
+    const resetLink = `${angular_apiUrl}/reset-password?token=${resetToken}`;
 
     await this.mailerService.sendMail({
       to: email,

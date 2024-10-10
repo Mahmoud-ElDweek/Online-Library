@@ -4,7 +4,7 @@
   class="bg-[#f9f9f9] dark:bg-dark-900 py-24 xl:px-24 lg:px-12 md:px-6 sm:px-8 px-2"
 >
   <div class="">
-    <div class="grid xs:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5">
+    <div class="grid xs:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
       <aside class="grid gap-7 h-fit">
         <div
           class="search bg-white dark:bg-dark-800 dark:border-gray-500 border-gray-100 border-2 rounded p-7"
@@ -58,13 +58,20 @@
               {{ category.name }}
             </span>
           </p>
-          }
-          @if(catPage < categoryPages ) {
-            <p (click)="loadMoreCategories()" 
-            class="text-center py-3 text-text-primary dark:text-text-forDark cursor-pointer hover:underline">Show More...</p>
+          } @if(catPage < categoryPages ) {
+          <p
+            (click)="loadMoreCategories()"
+            class="text-center py-3 text-text-primary dark:text-text-forDark cursor-pointer hover:underline"
+          >
+            Show More...
+          </p>
           }@else {
-            <p (click)="resetCategories()" 
-            class="text-center py-3 text-text-primary dark:text-text-forDark cursor-pointer hover:underline">Show Less...</p>
+          <p
+            (click)="resetCategories()"
+            class="text-center py-3 text-text-primary dark:text-text-forDark cursor-pointer hover:underline"
+          >
+            Show Less...
+          </p>
           }
         </div>
         <!-- <div class="search bg-white dark:bg-[#081d31] dark:border-gray-500 border-gray-100 border-2 rounded p-7">
@@ -100,18 +107,25 @@
               {{ author.name }}
             </span>
           </p>
-          }
-          @if(authorPage < authorPages ) {
-            <p (click)="loadMoreAuthors()" 
-            class="text-center py-3 text-text-primary dark:text-text-forDark cursor-pointer hover:underline">Show More...</p>
+          } @if(authorPage < authorPages ) {
+          <p
+            (click)="loadMoreAuthors()"
+            class="text-center py-3 text-text-primary dark:text-text-forDark cursor-pointer hover:underline"
+          >
+            Show More...
+          </p>
           }@else {
-            <p (click)="resetAuthors()" 
-            class="text-center py-3 text-text-primary dark:text-text-forDark cursor-pointer hover:underline">Show Less...</p>
+          <p
+            (click)="resetAuthors()"
+            class="text-center py-3 text-text-primary dark:text-text-forDark cursor-pointer hover:underline"
+          >
+            Show Less...
+          </p>
           }
         </div>
       </aside>
 
-      <section class="xs:grid-cols-1 md:col-span-2 lg:col-span-3">
+      <section class="xs:grid-cols-1 md:col-span-2 lg:col-span-3 xl:col-span-4">
         <div
           class="flex bg-white dark:bg-dark-800 dark:border-gray-500 border-gray-100 border-2 rounded px-1 py-4 sm:px-4 items-center justify-between"
         >
@@ -163,25 +177,41 @@
           </div>
         </div>
 
-        @if(allBooks.length === 0 ) {
+
+        @if(isLoading) {
+
+        
         <div class="flex justify-center py-10">
           <span class="block fixed">
             <app-loading-spinner></app-loading-spinner>
           </span>
         </div>
-        } @else { @if(currentView === 'grid'){
-        <app-books-grid-list [allBooks]="allBooks"></app-books-grid-list>
-        } @if(currentView === 'list'){
-        <app-books-list [allBooks]="allBooks"></app-books-list>
-        } } @if(allBooks.length > 2) {
+      } @else {
+
+        @if(allBooks.length === 0 ) {
+          <p class="text-xl font-semibold text-text-primary py-4 px-2 dark:text-text-forDark">No Books Founded.</p>
+        } @else {
+          @if(currentView === 'grid'){
+          <app-books-grid-list [allBooks]="allBooks"></app-books-grid-list>
+          } 
+          @if(currentView === 'list'){
+          <app-books-list [allBooks]="allBooks"></app-books-list>
+          } 
+        } 
+        
+        @if(bookPages > 1) {
         <app-pagination
-          [currentPage]="page"
+          [currentPage]="+page"
           [totalPages]="bookPages"
           (pageChange)="onPageChanged($event)"
         >
         </app-pagination>
         }
+      }
+
       </section>
     </div>
   </div>
 </div>
+
+

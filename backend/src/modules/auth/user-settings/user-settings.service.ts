@@ -1,4 +1,4 @@
-import { ForbiddenException, HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User } from 'src/core/schemas/user.schema';
@@ -13,10 +13,10 @@ export class UserSettingsService {
 
   constructor(@InjectModel(User.name) private readonly userModel: Model<User>, private readonly mailerService: MailerService) { 
     cloudinary.config({
-      cloud_name: 'dvrl2eknu',
-      api_key: '287955823152971',
-      api_secret: 'TwNg0tN4IDLdQ0k6GEcFZco0deU'
-    });
+      cloud_name: process.env.CLOUD_NAME,
+      api_key: process.env.CLOUDINARY_API_KEY,
+      api_secret: process.env.CLODINARY_API_SECRET
+  });
   }
 
 

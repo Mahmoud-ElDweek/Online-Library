@@ -1,10 +1,17 @@
-
 <app-navbar></app-navbar>
 
 
-<main>
+<main id="Main-Section" class="bg-light-100 dark:bg-dark-800">
   <app-toast></app-toast>
   <router-outlet></router-outlet>
+
+  @if (isScrollTopVisible) {
+  <span (click)="scrollUp()" class="fixed right-8 bottom-8 sm:right-16 sm:bottom-16 cursor-pointer"
+    style="z-index: 99999999;">
+    <i
+      class="fa-solid fa-circle-chevron-up animate-bounce text-4xl text-text-primary dark:text-text-forDark hover:text-accent-blue dark:hover:text-accent-blue"></i>
+  </span>
+  }
 </main>
 
 <app-footbar></app-footbar>

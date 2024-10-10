@@ -106,7 +106,7 @@ export class SigninComponent {
 
       this._authourizationService.signIn(this.loginForm.value).subscribe({
         next: (res) => {
-          console.log(res);
+          //console.log(res);
           this.isLoading = false;
           this.loginForm.reset();
           this._authourizationService.saveUserToken(res.token);
@@ -115,7 +115,7 @@ export class SigninComponent {
           this.getCart();
         },
         error: (err) => {
-          console.log(err);
+          // console.log(err);
           this.errLogMsg = err.error.message;
           this.isLoading = false;
         },
@@ -128,7 +128,7 @@ export class SigninComponent {
   //get wishlist for updating num of wishlist items
 
   getWishList() {
-    console.log("get");
+    //console.log("get");
 
     this._getWishlist.getWishlist().subscribe({
       next: (res) => {
@@ -136,10 +136,10 @@ export class SigninComponent {
         this._wishlistBooksService.updateWishlistBooks(res.data.books)
       },
       error: (err) => {
-        console.log(err, "err get wish list prodcuts");
+        // console.log(err, "err get wish list prodcuts");
       },
       complete: () => {
-        console.log("get wish list  books >> login");
+        //console.log("get wish list  books >> login");
       },
     });
   }
@@ -152,10 +152,10 @@ export class SigninComponent {
         this._cartBooksService.updateCartBooks(res.data.books); // Update cart books
       },
       error: (err) => {
-        console.log("Error getting cart in login:", err);
+        //console.log("Error getting cart in login:", err);
       },
       complete: () => {
-        console.log("Cart fetched successfully in login");
+        //console.log("Cart fetched successfully in login");
       },
     });
   }
@@ -172,11 +172,11 @@ export class SigninComponent {
         }
       },
       error: (err) => {
-        console.log(err,"error from check recommendation");
+        // console.log(err,"error from check recommendation");
         this.router.navigate(['/home']);
       },
       complete: () => {
-        console.log('Recommendations check complete');
+        //console.log('Recommendations check complete');
       }
     });
   }

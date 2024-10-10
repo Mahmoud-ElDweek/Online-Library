@@ -73,12 +73,13 @@ export class NavbarComponent implements OnInit {
       this.profileImage = res
 
     })
+    if(this.token && this.token?.length !== 0) {
+      this.getProfilePicure()
+    }
   }
 
   ngOnInit(): void {
-    if(this.token?.length !== 0) {
-      this.getProfilePicure()
-    }
+  
     this.toggleLang()
     this.loadLang()
   }

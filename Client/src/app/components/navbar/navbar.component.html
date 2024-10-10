@@ -23,7 +23,7 @@
             </li>
             <li>
               <button
-                class="flex items-center dark:bg-[#0a0a0a] dark:dark:text-white p-3 rounded"
+                class="flex items-center dark:dark:text-white p-3 rounded"
                 (click)="toggleDarkMode()"
               >
                 <i class="fa-solid fa-sun text-xl" *ngIf="!isDarkMode"></i>
@@ -67,11 +67,11 @@
             </li>
             <li>
               <a
-                routerLink="/about"
+                routerLink="/streaming"
                 routerLinkActive="curved-div"
                 class="dark:text-white tracking-wider px-4 py-4 grid place-items-center transition-colors duration-300"
               >
-                {{ "navbar.About Us" | translate }}
+                {{ "navbar.Stream Events" | translate }}
               </a>
             </li>
           </ul>
@@ -155,10 +155,10 @@
         </div>
 
         <!-- Third Column (User Profile and Login/Register) -->
-        <div class="flex items-center space-x-4 order-1 md:order-none w-fit">
-          <ul class="flex items-center space-x-4">
-            <li *ngIf="isLoggedIn">
-              <!-- User Dropdown -->
+      
+        <div class="flex items-center sm:space-x-4 order-1 md:order-none w-fit">
+          <ul class="flex items-center sm:space-x-4">
+            @if (isLoggedIn) {
               <div class="relative" style="z-index: 1000">
                 <button (click)="toggleDropdown()" class="flex items-center">
                   @if(profileImage){
@@ -178,8 +178,8 @@
                 <div
                   *ngIf="isDropdownOpen"
                   [ngClass]="{
-                    'right-0': currentLang === 'en',
-                    'left-0': currentLang === 'ar'
+                    'sm:right-0': currentLang === 'en',
+                    'sm:left-0': currentLang === 'ar'
                   }"
                   class="absolute top-full mt-2 w-48 bg-white dark:bg-dark-800 border dark:border-white text-black dark:dark:text-white rounded-lg shadow-lg p-2 z-50"
                 >
@@ -210,27 +210,33 @@
                   </a>
                 </div>
               </div>
-            </li>
-            <li *ngIf="!isLoggedIn">
-              <a
-                routerLink="/signin"
-                routerLinkActive="text-dark bg-[#f9f9f9] dark:bg-[#0e2134]"
-                class="flex items-center gap-1 text-text-primary dark:text-white px-4 py-4 transition-colors duration-300"
-              >
-                <i class="fas fa-sign-in-alt mr-1"></i>
-                <span>{{ "navbar.Login" | translate }}</span>
-              </a>
-            </li>
-            <li *ngIf="!isLoggedIn">
-              <a
-                routerLink="/signup"
-                routerLinkActive="text-white bg-slate-700 dark:bg-[#081828]"
-                class="flex items-center gap-1 dark:text-white px-4 py-4 transition-colors duration-300"
-              >
-                <i class="fas fa-user-plus mr-1"></i
-                ><span>{{ "navbar.Register" | translate }}</span>
-              </a>
-            </li>
+            } @else {
+
+              <li>
+                <a
+                  routerLink="/signin"
+                  routerLinkActive="text-text-forDark sm:text-text-primary bg-dark-700 dark:bg-dark-800 sm:bg-light-100 dark:sm:bg-dark-700"
+                  class="flex items-center gap-1 sm:text-text-primary dark:text-white px-2 sm:px-4 py-4 transition-colors duration-300"
+                >
+                <span class="hidden sm:block">
+                  <i class="fas fa-sign-in-alt mr-1"></i>
+                </span>
+                  <span>{{ "navbar.Login" | translate }}</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  routerLink="/signup"
+                  routerLinkActive="text-white bg-dark-700 dark:bg-dark-800"
+                  class="flex items-center gap-1 dark:text-white px-2 sm:px-4 py-4 transition-colors duration-300"
+                >
+                <span class="hidden sm:block">
+                  <i class="fas fa-user-plus mr-1"></i>
+                </span>
+                  <span>{{ "navbar.Register" | translate }}</span>
+                </a>
+              </li>
+            }
           </ul>
         </div>
       </div>

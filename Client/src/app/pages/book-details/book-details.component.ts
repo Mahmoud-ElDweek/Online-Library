@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ReviewService } from '../../services/reviews/review.service';
 import { BooksService } from '../../services/books/Books.service';
-import { isPlatformBrowser, NgClass } from '@angular/common';
+import { isPlatformBrowser, NgClass, NgFor } from '@angular/common';
 import { ConfirmationDialogComponent } from '../../components/confirmation-dialog/confirmation-dialog.component';
 import { jwtDecode } from "jwt-decode";
 import { ReviewInterface } from '../../interfaces/review.interface';
@@ -21,13 +21,17 @@ interface DecodedToken {
 @Component({
   selector: 'app-book-details',
   standalone: true,
-  imports: [SubNavbarComponent, ReactiveFormsModule, NgClass, ConfirmationDialogComponent, StarsLoopComponent, TranslateModule, AddToWishlistBtnComponent, AddToCartBtnComponent],
+  imports: [SubNavbarComponent, ReactiveFormsModule, NgClass, ConfirmationDialogComponent, StarsLoopComponent, TranslateModule, AddToWishlistBtnComponent, AddToCartBtnComponent,NgFor],
   templateUrl: './book-details.component.html',
   styleUrl: './book-details.component.scss'
 }) 
 
 export class BookDetailsComponent implements OnInit, AfterViewInit {
 
+  stars = Array(5).fill(0);
+  selectedRating: number = 0; 
+  hoverRating: number = 0; 
+  
   quantity: number = 0;
   book: any = {};
   bookId: any= "";
@@ -101,22 +105,11 @@ ngAfterViewInit(): void {
   }
 
 
-  decreaseBooks(){
-    if (this.quantity < 1) {
-      this.quantity = 0;
-    }else{
-      this.quantity -= 1;
-    }
-  }
-
-  increaseBooks(bookStock : number){
-    if (this.quantity < bookStock ) {
-      this.quantity += 1;
-    }
-    
-  }
-
   sendReview(){
+    this.reviewForm.patchValue({
+      rating: this.selectedRating
+    });
+
     this.addReviewInDb()
     this.reviewForm.reset()
   } 
@@ -234,7 +227,7 @@ ngAfterViewInit(): void {
   updateReviewInDb(reviewId: string){
     const reviewData: ReviewInterface = {
       bookId: this.bookId,
-      rating: this.reviewForm.get('rating')?.value,
+      rating: this.selectedRating,
       comment: this.reviewForm.get('comment')?.value
     };
 
@@ -372,27 +365,28 @@ ngAfterViewInit(): void {
   handleCancel() {
     this.showConfirmationDialog = false;
   }
+
+
+  onMouseEnter(index: number) {
+    this.hoverRating = index + 1; 
+  }
+  
+  onMouseLeave() {
+    this.hoverRating = 0;
+  }
+
+  onClick(index: number) {
+    
+    this.selectedRating = index + 1; 
+    console.log(this.selectedRating);
+  }
+
+  isFilled(index: number): boolean {
+    return (this.hoverRating ? this.hoverRating : this.selectedRating) > index;
+  }
+
+
 }
 
 
 
-
-//   updateStarArray(): void {
-//     const fullStars = Math.floor(this.bookRating);
-//     const halfStar = this.bookRating % 1 !== 0;
-
-//     this.starArray = Array(fullStars).fill(1);
-//     if (halfStar) {
-//       this.starArray.push(0.5);
-//     }
-//     const emptyStars = 5 - this.starArray.length;
-//     this.starArray.push(...Array(emptyStars).fill(0));
-//   }
-  
-//   changeLang(lang: string) {
-//     this._myTranslateService.changLang(lang);
-//   }
-// }
-
-  
-// >>>>>>> master

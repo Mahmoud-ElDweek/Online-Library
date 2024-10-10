@@ -1,7 +1,7 @@
 <app-sub-navbar></app-sub-navbar>
 
 <div class="bg-light-100 dark:bg-dark-800 py-24 xl:px-24 lg:px-12 md:px-6 sm:px-8 px-2">
-    <div class="flex gap-20 py-5 flex-col md:flex-row justify-center items-center px-5">
+    <div class="flex gap-20 py-5 flex-col md:flex-row justify-center items-center px-5 max-w-7xl mx-auto">
         <div class="basis-1/3">
             <img [src]="book.coverImage"
                 class="rounded-3xl h-96 w-full shadow-lg hover:scale-105 hover:border-2 cursor-pointer" alt="">
@@ -42,19 +42,19 @@
                 } @else if (book.stock === 0 ) {
                 <p class="text-red-500 font-bold text-sm mt-3"> {{"book-details.Out Of Stock!"|translate}} </p>
                 }
-                <div class="flex gap-4 mt-10 flex-col md:flex-row">
+                <div class="flex gap-4 mt-10">
 
 
                     <div
-                        class="bg-white px-3 py-2 rounded-md text-black hover:text-white hover:bg-blue-500 border-2 hover:scale-105 duration-300 dark:bg-slate-300">
-                        <button (click)="triggerAddToCart()" class="mt-1 mx-1">
+                        class="bg-white px-3 py-2 rounded-md text-black hover:text-white dark:hover:bg-blue-600 hover:bg-blue-500 border-2 hover:scale-105 duration-300 dark:bg-slate-300 w-fit">
+                        <button (click)="triggerAddToCart()" class="mt-1 mx-1 w-fit">
                             {{"book-details.Add To Cart" | translate}}
                         </button>
                         <app-add-to-cart-btn></app-add-to-cart-btn>
                     </div>
                     <div
-                        class="bg-white px-3 py-2 rounded-md text-black hover:text-white hover:bg-blue-500 border-2 hover:scale-105 duration-300 dark:bg-slate-300">
-                        <button (click)="triggerAddToWishList()" class="mt-1 mx-1">
+                        class="bg-white px-3 py-2 rounded-md text-black hover:text-white dark:hover:bg-blue-600 hover:bg-blue-500 border-2 hover:scale-105 duration-300 dark:bg-slate-300 w-fit">
+                        <button (click)="triggerAddToWishList()" class="mt-1 mx-1 w-fit">
                             {{"book-details.Add To Favorite" | translate}}
                         </button>
                         <app-add-to-wishlist-btn [bookId]="book._id"></app-add-to-wishlist-btn>
@@ -96,17 +96,19 @@
                 <i class="fa-solid fa-ellipsis absolute top-4 right-4 text-lg cursor-pointer hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-600"
                     (click)="toggleDropdown(review._id)"></i>
                 }
+                @if (review.userId.fName && review.userId.lName) {
 
-                <div class="flex mb-2 gap-2">
+                  <div class="flex mb-2 gap-2">
                     <p class="rounded-full bg-blue-500 h-10 w-10 flex justify-center items-center">
-                        {{review.userId.fName[0] + review.userId.lName[0]}}</p>
-                    <div>
+                      {{review.userId.fName[0] + review.userId.lName[0]}}</p>
+                      <div>
                         <h3 class="text-xl font-semibold dark:text-gray-400">{{review.userId.fName}}
-                            {{review.userId.lName[0]}}.</h3>
-
-                        <p class="text-gray-500 text-sm">{{review.date.slice(0,10)}}</p>
-                    </div>
-                </div>
+                          {{review.userId.lName[0]}}.</h3>
+                          
+                          <p class="text-gray-500 text-sm">{{review.date.slice(0,10)}}</p>
+                        </div>
+                      </div>
+                    }
                 <div class="mb-2">
                     <app-stars-loop [rating]="review.rating"></app-stars-loop>
                 </div>
@@ -129,7 +131,7 @@
                 <button 
                 class="bg-white ms-2 px-3 py-2 rounded-md text-black hover:text-white hover:bg-blue-500 border-2 cursor-pointer hover:scale-105 duration-300 dark:bg-slate-300" 
                 (click)="showLessReviews()"
-                >{{"book-details.Show Less Reviews"|translate}}</button>
+                >{{"Show Less Reviews"|translate}}</button>
             }
         </div>
     </div>
@@ -137,20 +139,31 @@
 
     <!--! Add review -->
     @if(isLoggedIn){
-    <div class="px-5 py-6">
+    <div class="px-5 py-6 max-w-4xl mx-auto">
         <h3 class="text-xl font-semibold mb-5 dark:text-white underline">{{"book-details.Add Your Review"|translate}}
         </h3>
 
         <form action="" [formGroup]="reviewForm">
+            
+            <!-- <input type="number" name="raiting" placeholder="{{'book-details.Raiting (1-5)'|translate}}" min="1" max="5"  class="w-full border-2 focus:border-blue-600 outline-none rounded-md p-3 my-3 dark:bg-slate-300 dark:text-slate-700" formControlName="rating"> -->
+            <div class="star-rating flex items-center mx-3 ">
+              <ng-container *ngFor="let star of stars; index as i">
+                <i
+                  class="fa-solid fa-star cursor-pointer text-2xl"
+                  [class.text-gold]="isFilled(i)" 
+                  [class.text-gray]="!isFilled(i)"
+                  (mouseenter)="onMouseEnter(i)"
+                  (mouseleave)="onMouseLeave()"
+                  (click)="onClick(i)"
+                ></i>
+              </ng-container>
+            </div>
             <textarea name="review" placeholder="{{'book-details.Add Comment...'|translate}}"
                 class="w-full border-2 focus:border-blue-600 outline-none rounded-md p-3 mt-3 dark:bg-slate-300 dark:text-slate-700"
-                rows="2" maxlength="500" formControlName="comment" #commentInput (keyup)="calcLengthComment()"
+                rows="3" maxlength="500" formControlName="comment" #commentInput (keyup)="calcLengthComment()"
                 ></textarea>
-            <span class="text-xs text-gray-500"
-                [ngClass]="commentLength >= 500? 'text-red-600' : ''">(500/{{commentLength}})</span>
-            <input type="number" name="raiting" placeholder="{{'book-details.Raiting (1-5)'|translate}}" min="1" max="5"
-                class="w-full border-2 focus:border-blue-600 outline-none rounded-md p-3 my-3 dark:bg-slate-300 dark:text-slate-700"
-                formControlName="rating">
+            <p class="text-xs text-gray-500"
+                [ngClass]="commentLength >= 500? 'text-red-600' : ''">(500/{{commentLength}})</p>
             @if(isUpdaiting){
             <button
                 class="bg-white px-3 py-2 rounded-md text-black hover:text-white hover:bg-blue-500 border-2 hover:scale-105 duration-300 block ms-auto dark:bg-slate-300"

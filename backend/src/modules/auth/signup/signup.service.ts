@@ -11,6 +11,7 @@ import { HttpService } from '@nestjs/axios';
 import { firstValueFrom } from 'rxjs';
 import { JwtService } from '@nestjs/jwt';
 import * as dotenv from 'dotenv';
+import { angular_apiUrl } from 'src/core/utils/frontApi.util';
 dotenv.config();
 @Injectable()
 export class SignupService {
@@ -52,7 +53,7 @@ export class SignupService {
 
     await newUser.save();
 
-    const verificationLink = `http://localhost:4200/verify-email?token=${verificationToken}`;
+    const verificationLink = `${angular_apiUrl}/verify-email?token=${verificationToken}`;
 
     await this.mailerService.sendMail({
       to: body.email,

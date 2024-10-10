@@ -155,7 +155,6 @@
               placeholder="your.email@mail.com"
               formControlName="email"
               required
-              [disabled]="true"
             />
             @if(settingsForm.get('email')?.hasError('required') &&
             settingsForm.get('email')?.touched){

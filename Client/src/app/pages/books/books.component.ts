@@ -48,7 +48,7 @@ import { LoadingSpinnerComponent } from "../../components/loading-spinner/loadin
 })
 export class BooksComponent implements OnInit {
   metaData: any;
-
+  isLoading: boolean = true;
   allBooks: Array<BookInterface> = [];
   filteredBooks: Array<BookInterface> = [];
   categories: Array<CategoryInterface> = [];
@@ -58,7 +58,7 @@ export class BooksComponent implements OnInit {
   authorPage: number = 1;
 
 
-  booksLimit: number = 6;
+  booksLimit: number = 12;
   filteredCategory: string = '';
   selectedCategory: string = '';
 
@@ -136,9 +136,10 @@ export class BooksComponent implements OnInit {
             this.filteredBooks = res.data;
             this.allBooks = this.filteredBooks;
             this.bookPages = res.metaData.numberOfPages || 1;
-            this.page = res.metaData.currentPage || 1; // Ensure we set to 1 if not available
+            this.page = res.metaData.currentPage || 1; 
           }
-          console.log(this.filteredBooks);
+          this.isLoading = false;
+          window.scrollTo({ top: 150, behavior: 'smooth' });  
         },
         error: (err) => {
           console.error(err);

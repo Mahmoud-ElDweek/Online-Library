@@ -1,0 +1,1 @@
+export const angular_apiUrl = "https://andalosia.vercel.app";

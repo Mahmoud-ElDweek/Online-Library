@@ -12,11 +12,11 @@ export class AuthorService {
 
     constructor(@InjectModel(Author.name) private authorModel: Model<Author> // Inject Author model
 ){
-    cloudinary.config({
-        cloud_name: 'dvrl2eknu',
-        api_key: '287955823152971',
-        api_secret: 'TwNg0tN4IDLdQ0k6GEcFZco0deU'
-    });
+  cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLODINARY_API_SECRET
+});
 }
 
 addNewAuthor = async (body: AuthorDTO, file:Express.Multer.File) => {

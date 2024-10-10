@@ -18,9 +18,9 @@ export class BookService {
     @InjectModel(Category.name) private CategoryModel: Model<Category>,
   ) {
     cloudinary.config({
-      cloud_name: 'dvrl2eknu',
-      api_key: '287955823152971',
-      api_secret: 'TwNg0tN4IDLdQ0k6GEcFZco0deU',
+      cloud_name: process.env.CLOUD_NAME,
+      api_key: process.env.CLOUDINARY_API_KEY,
+      api_secret: process.env.CLODINARY_API_SECRET,
     });
   }
 
@@ -99,15 +99,8 @@ export class BookService {
     sortField: string,
     sortOrder: string,
   ) => {
-    // Trim and validate page and limit
-    const page = Math.max(1, parseInt(paginationDTO.page.toString(), 10) || 1); // Ensure page is at least 1
-    const limit = Math.min(
-      Math.max(1, parseInt(paginationDTO.limit.toString(), 10) || 10),
-      100,
-    ); // Limit between 1 and 100
-
+    const { page, limit } = paginationDTO;
     const skip = (page - 1) * limit;
-
     const query: any = {};
 
     if (category && category.trim() !== '') {
