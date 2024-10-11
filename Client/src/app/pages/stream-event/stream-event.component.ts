@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { StreamInterface } from '../../interfaces/streamEvent.interface';
 import { AllStreamEventService } from '../../services/stream-event/all-stream-event.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -9,54 +9,62 @@ import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-stream-event',
   standalone: true,
-  imports: [SubNavbarComponent,TranslateModule],
+  imports: [SubNavbarComponent, TranslateModule],
   templateUrl: './stream-event.component.html',
-  styleUrl: './stream-event.component.scss'
+  styleUrls: ['./stream-event.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush  // استخدام OnPush لتحسين الأداء
 })
 export class StreamEventComponent implements OnInit {
-
-  streamEvent!: StreamInterface
   allOldStreams: Array<StreamInterface> = [];
   page: number = 1;
   limit: number = 5;
-  streamTitle: string = ''
+  currentStream: StreamInterface | null = null; // تخزين البث الحالي المحدد
+
   constructor(
     private _allStreamEventService: AllStreamEventService,
-    private _domSanitizer:DomSanitizer,
-    private _myTranslateService:MyTranslateService
-  ) { }
-
-
+    private _domSanitizer: DomSanitizer,
+    private _myTranslateService: MyTranslateService,
+    private cdr: ChangeDetectorRef // لإجبار Angular على التحقق من التغييرات
+  ) {}
 
   ngOnInit(): void {
-this.getAllOldStreams()
+    this.getAllOldStreams();
   }
 
   getAllOldStreams() {
-    this._allStreamEventService.getAllOldStreams(
-      this.page,
-      this.limit,
-      this.streamTitle
-    ).subscribe({
+    this._allStreamEventService.getAllOldStreams(this.page, this.limit).subscribe({
       next: (res) => {
-        this.allOldStreams = res.data
+        this.allOldStreams = res.data;
+        if (this.allOldStreams.length > 0) {
+          // تعيين البث الحالي إلى آخر بث بشكل افتراضي
+          this.currentStream = this.allOldStreams[this.allOldStreams.length - 1];
+        }
+        this.cdr.markForCheck(); // التأكد من تحديث العرض
         console.log(res, "dataaaaaaaaa");
-        
       },
       error: (err) => {
         console.log(err);
       },
-      complete: () =>{
-        console.log("Succes, Got All Old Streams");
+      complete: () => {
+        console.log("Success, Got All Old Streams");
       }
-    })
+    });
   }
 
-  getSanitizedUrl(streamUrlCode: string): SafeResourceUrl {
+  // تحديث البث الحالي عند النقر على بث
+  onStreamSelect(stream: StreamInterface): void {
+    this.currentStream = stream;
+    this.cdr.markForCheck(); // التأكد من تحديث العرض
+  }
+
+  getSanitizedUrl(streamUrlCode: any): SafeResourceUrl {
     return this._domSanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${streamUrlCode}`);
   }
-  getSanitizedChatUrl(streamUrlCode: string): SafeResourceUrl {
-    return this._domSanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/live_chat?${streamUrlCode}&embed_domain=https://andalosia.vercel.app`);
+
+  getSanitizedChatUrl(streamUrlCode: any): SafeResourceUrl {
+    return this._domSanitizer.bypassSecurityTrustResourceUrl(
+      `https://www.youtube.com/live_chat?v=${streamUrlCode}&embed_domain=andalosia.vercel.app`
+    );
   }
 
   getThumbnailUrl(streamUrlCode: string): string {

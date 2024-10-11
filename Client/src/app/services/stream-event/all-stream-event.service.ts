@@ -15,7 +15,7 @@ export class AllStreamEventService {
   getAllOldStreams(
     page: number,
     limit: number,
-    streamTitle: string
+    streamTitle?: string
   ): Observable<any> {
     let params = new HttpParams()
 

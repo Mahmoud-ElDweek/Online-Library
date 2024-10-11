@@ -23,6 +23,8 @@ export class AppComponent implements OnInit {
   constructor(private _loadingService: LoadingService) {}
   ngOnInit() {
     this._loadingService.setLoading(true); 
+
+      
       const lang = localStorage.getItem('lang') || 'en';
       const token = localStorage.getItem('token');
 
