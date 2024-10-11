@@ -26,9 +26,7 @@ export class StreamEventComponent implements OnInit {
     private _myTranslateService:MyTranslateService
   ) { }
 
-  changeLang(lang: string) {
-    this._myTranslateService.changLang(lang);
-  }
+
 
   ngOnInit(): void {
 this.getAllOldStreams()
@@ -42,7 +40,7 @@ this.getAllOldStreams()
     ).subscribe({
       next: (res) => {
         this.allOldStreams = res.data
-        console.log(res.data);
+        console.log(res, "dataaaaaaaaa");
         
       },
       error: (err) => {
@@ -57,10 +55,15 @@ this.getAllOldStreams()
   getSanitizedUrl(streamUrlCode: string): SafeResourceUrl {
     return this._domSanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${streamUrlCode}`);
   }
+  getSanitizedChatUrl(streamUrlCode: string): SafeResourceUrl {
+    return this._domSanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/live_chat?${streamUrlCode}&embed_domain=https://andalosia.vercel.app`);
+  }
 
   getThumbnailUrl(streamUrlCode: string): string {
     return `https://img.youtube.com/vi/${streamUrlCode}/maxresdefault.jpg`;
   }
 
-
+  changeLang(lang: string) {
+    this._myTranslateService.changLang(lang);
+  }
 }
