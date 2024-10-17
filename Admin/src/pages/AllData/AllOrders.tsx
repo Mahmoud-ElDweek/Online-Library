@@ -1,11 +1,11 @@
-import { useEffect, useState, useCallback, useRef } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { fetchAllOrders } from "../../components/fetchOrder";
 import Pagination from "../../components/Pagination";
 import axios from "axios";
 import { CubeIcon } from "@heroicons/react/solid";
 import { apiUrl } from "../../utils/apiUrl";
 import Swal from "sweetalert2";
-import { io, Socket } from "socket.io-client";
+// import { io, Socket } from "socket.io-client";
 import DetailsModal from "../../components/DetailsModal";
 import OrderTable from "../../components/OrderTable";
 import { Order } from "../../interfaces/OrderInterface";
@@ -130,15 +130,15 @@ const AllOrders = () => {
     setEditingOrder(order);
   };
 
-  const socketRef = useRef<Socket | null>(null);
+  // const socketRef = useRef<Socket | null>(null);
 
-  useEffect(() => {
-    socketRef.current = io(`${apiUrl}`);
+  // useEffect(() => {
+  //   socketRef.current = io(`${apiUrl}`);
 
-    return () => {
-      socketRef.current?.disconnect(); // Ensure to disconnect on cleanup
-    };
-  }, []);
+  //   return () => {
+  //     socketRef.current?.disconnect(); // Ensure to disconnect on cleanup
+  //   };
+  // }, []);
 
   const updateOrder = async () => {
     if (!editingOrder) return;
@@ -151,7 +151,7 @@ const AllOrders = () => {
       );
       const updatedOrder = response.data.updatedOrder;
 
-      socketRef.current?.emit("paymentStatusChanged", updatedOrder);
+      // socketRef.current?.emit("paymentStatusChanged", updatedOrder);
       console.log("Order status changed emitted:", updatedOrder);
       setAllOrders((prevOrders) =>
         prevOrders.map((order) =>
@@ -613,20 +613,20 @@ const AllOrders = () => {
         </div>
       </div>
 
-     
       <DetailsModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         order={selectedOrder}
       />
-       
-      <div className="flex justify-center mt-6">
-        <Pagination
-          currentPage={page}
-          totalPages={totalPages}
-          onPageChange={handlePageChange}
-        />
-      </div>
+      {totalPages > 1 && (
+        <div className="flex justify-center mt-6">
+          <Pagination
+            currentPage={page}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
+        </div>
+      )}
     </div>
   );
 };

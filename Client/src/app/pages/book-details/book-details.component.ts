@@ -14,6 +14,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MyTranslateService } from '../../services/translation/my-translate.service';
 import { AddToWishlistBtnComponent } from "../../components/add-to-wishlist-btn/add-to-wishlist-btn.component";
 import { AddToCartBtnComponent } from "../../components/add-to-cart-btn/add-to-cart-btn.component";
+import { LoadingSpinnerComponent } from "../../components/loading-spinner/loading-spinner.component";
 
 interface DecodedToken {
   userId: string;
@@ -21,7 +22,7 @@ interface DecodedToken {
 @Component({
   selector: 'app-book-details',
   standalone: true,
-  imports: [SubNavbarComponent, ReactiveFormsModule, NgClass, ConfirmationDialogComponent, StarsLoopComponent, TranslateModule, AddToWishlistBtnComponent, AddToCartBtnComponent,NgFor],
+  imports: [SubNavbarComponent, ReactiveFormsModule, NgClass, ConfirmationDialogComponent, StarsLoopComponent, TranslateModule, AddToWishlistBtnComponent, AddToCartBtnComponent, NgFor, LoadingSpinnerComponent],
   templateUrl: './book-details.component.html',
   styleUrl: './book-details.component.scss'
 }) 
@@ -80,10 +81,13 @@ export class BookDetailsComponent implements OnInit, AfterViewInit {
     if (this.isBrowser) {
       this.isLoggedIn = localStorage.getItem('token')? true: false;
     }
+    console.log(this.bookId);
+    this.bookId = this.route.snapshot.paramMap.get('id');
+    console.log(this.bookId);
+    
   }
 
   ngOnInit(): void {
-    this.bookId = this.route.snapshot.paramMap.get('id');
     this.getAllReviewsFromDb()
     this.getBookFromDb()
     this.getReviewsFromDb()
@@ -129,11 +133,13 @@ ngAfterViewInit(): void {
 
 
   // !Book
-  getBookFromDb(){
+  getBookFromDb(){ 
       this._booksService.getSinglBook(this.bookId).subscribe({
       next: (res) => {
         // console.log(res.data)
         this.book = res.data
+        console.log(this.book);
+        
       },
       error: (err) => {
         console.log(err)

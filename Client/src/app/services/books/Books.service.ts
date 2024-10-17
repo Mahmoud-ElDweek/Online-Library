@@ -28,10 +28,7 @@ export class BooksService {
   }
 
   getSinglBook(bookId: string): Observable<any>{
-    if (this.isBrowser) {
-      this.headers = this.headers.set('token', this.token);
-    }
-    return this._httpClient.get(`${apiUrl}/books/${bookId}`,{headers: this.headers});
+    return this._httpClient.get(`${apiUrl}/books/${bookId}`);
   }
 
   updateTheBook(bookId: string , body: any): Observable<any>{

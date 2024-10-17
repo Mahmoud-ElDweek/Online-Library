@@ -217,9 +217,11 @@ const AllUsers = () => {
             />
         )}
         {/* Pagingation */}
-        <div className='py-3 flex justify-center'>
-            <Pagination totalPages={numberOfPages} currentPage={page} onPageChange={handlePageChange} />
-        </div>
+        {numberOfPages > 1 && 
+      <div className='py-3 flex justify-center'>
+        <Pagination totalPages={numberOfPages} currentPage={page} onPageChange={handlePageChange} />
+      </div>
+      }
 
 
     </>

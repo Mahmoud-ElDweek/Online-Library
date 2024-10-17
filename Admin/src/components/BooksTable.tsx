@@ -104,7 +104,7 @@ const BooksTable = () => {
           onChange={(e) => setSearchTerm(e.target.value)} // Update search term on input change
           className="
                     input input-bordered w-125 
-                    bg-white text-stroke border-gray-300
+                    bg-white text-boxdark-2 dark:text-stroke border-gray-300
                     dark:bg-strokedark dark:text-gray-200 dark:placeholder-gray-400 dark:border-gray-600
                     transition-all duration-300 ease-in-out 
                     focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200
@@ -210,10 +210,11 @@ const BooksTable = () => {
           />
         </div>
       ))}
-
+      {numberOfPages > 1 && 
       <div className='py-3 flex justify-center'>
         <Pagination totalPages={numberOfPages} currentPage={page} onPageChange={handlePageChange} />
       </div>
+      }
     </>
   )
 }

@@ -18,7 +18,7 @@ export class SwiperComponent {
     1440: {slidesPerView: 4.2}
   };
   
-
+  skeletonArray = Array(7).fill(0);
   @Input() Books: any = [];
 
 }
