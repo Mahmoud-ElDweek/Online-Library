@@ -1,30 +1,17 @@
 
 import { Routes } from "@angular/router";
 import { HomeComponent } from "./pages/home/home.component";
-import { AboutComponent } from "./pages/about/about.component";
-import { ContactComponent } from "./pages/contact/contact.component";
 import { BooksComponent } from "./pages/books/books.component";
-import { CartComponent } from "./pages/cart/cart.component";
-import { WishlistComponent } from "./pages/wishlist/wishlist.component";
 import { SigninComponent } from "./pages/signin/signin.component";
 import { SignupComponent } from "./pages/signup/signup.component";
-import { UserSettingsComponent } from "./pages/user-settings/user-settings.component";
-import { BookDetailsComponent } from "./pages/book-details/book-details.component";
 import { Err404Component } from "./pages/err404/err404.component";
 import { AuthorsComponent } from "./pages/authors/authors.component";
-import { EmailVerifiedComponent } from "./pages/email-Verified/email-verified/email-verified.component";
 import { AccountSettingComponent } from "./components/account-setting/account-setting.component";
 import { BooksGridListComponent } from "./components/books-grid-list/books-grid-list.component";
 import { BooksListComponent } from "./components/books-list/books-list.component";
-import { RecommendationComponent } from "./pages/recommendation/recommendation.component";
-import { ForgotPasswordComponent } from "./pages/forgot-password/forgot-password.component";
-import { ResetPasswordComponent } from "./pages/reset-password/reset-password/reset-password.component";
-import { StreamEventComponent } from "./pages/stream-event/stream-event.component";
 import { SecuritySettingComponent } from "./components/security-setting/security-setting.component";
-import { PaymentComponent } from "./pages/payment/payment.component";
 import { MyOrdersComponent } from "./pages/my-orders/my-orders.component";
 import { authGuard } from "./guard/auth.guard";
-import { AuthorDetailsComponent } from "./pages/author-details/author-details.component";
 
 export const routes: Routes = [
   {
@@ -38,21 +25,22 @@ export const routes: Routes = [
   },
   {
     path: "about",
-    component: AboutComponent,
+    loadComponent: () => import('./pages/about/about.component').then(m => m.AboutComponent),
   },
   {
     path: "contact",
     canActivate: [authGuard],
-    component: ContactComponent,
+    loadComponent: () => import('./pages/contact/contact.component').then(m => m.ContactComponent),
+
   },
   {
     path: "payment", 
     canActivate: [authGuard],
-    component: PaymentComponent,
+    loadComponent: () => import('./pages/payment/payment.component').then(m => m.PaymentComponent),
   },
   {
     path: "book-details/:id",
-    component: BookDetailsComponent,
+    loadComponent: () => import('./pages/book-details/book-details.component').then(m => m.BookDetailsComponent),
   },
   {
     path: "books",
@@ -77,17 +65,17 @@ export const routes: Routes = [
   {
     path: "cart",
     canActivate: [authGuard],
-    component: CartComponent,
+    loadComponent: () => import('./pages/cart/cart.component').then(m => m.CartComponent),
   },
   {
     path: "wishlist",
     canActivate: [authGuard],
-    component: WishlistComponent,
+    loadComponent: () => import('./pages/wishlist/wishlist.component').then(m => m.WishlistComponent),
   },
   {
     path: "recommendation",
     canActivate: [authGuard],
-    component: RecommendationComponent,
+    loadComponent: () => import('./pages/recommendation/recommendation.component').then(m => m.RecommendationComponent),
   },
   {
     path: "signin",
@@ -100,7 +88,7 @@ export const routes: Routes = [
   {
     path: "user-settings",
     canActivate: [authGuard],
-    component: UserSettingsComponent,
+    loadComponent: () => import('./pages/user-settings/user-settings.component').then(m => m.UserSettingsComponent),
     children: [
       { path: "", redirectTo: "account", pathMatch: "full" },
       { path: "account", component: AccountSettingComponent },
@@ -110,16 +98,16 @@ export const routes: Routes = [
   },
   {
     path: "verify-email",
-    component: EmailVerifiedComponent,
+    loadComponent: () => import('./pages/email-Verified/email-verified/email-verified.component').then(m => m.EmailVerifiedComponent),
   },
 
   {
     path: "forgot-password",
-    component: ForgotPasswordComponent,
+    loadComponent: () => import('./pages/forgot-password/forgot-password.component').then(m => m.ForgotPasswordComponent),
   },
   {
     path: "reset-password",
-    component: ResetPasswordComponent,
+    loadComponent: () => import('./pages/reset-password/reset-password/reset-password.component').then(m => m.ResetPasswordComponent),
   },
   {
     path: "authors",
@@ -127,12 +115,12 @@ export const routes: Routes = [
   },
   {
     path: "authors/:id",
-    component: AuthorDetailsComponent,
+    loadComponent: () => import('./pages/author-details/author-details.component').then(m => m.AuthorDetailsComponent),
   },
   {
     path: "streaming",
     canActivate: [authGuard],
-    component: StreamEventComponent,
+    loadComponent: () => import('./pages/stream-event/stream-event.component').then(m => m.StreamEventComponent),
   },
   {
     path: "**",
