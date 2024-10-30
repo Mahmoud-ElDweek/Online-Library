@@ -1,4 +1,5 @@
 <swiper-container 
+    dir="ltr"
     [breakpoints]="breakpoints"
     speed="1000"
     autoplay-delay="2000" 
@@ -12,9 +13,8 @@
     coverflow-effect-modifier="1" 
     coverflow-effect-slide-shadows="true" 
     pagination="true"
-    
 >
-    @for (author of authors; track author.id) {
+    @for (author of authors; track author._id) {
         <swiper-slide class="relative">
             <!-- <img [src]="author.image" alt="" class=" h-full object-cover">
             <a routerLink="/authors" class="absolute bottom-[22%] right-[50%] translate-x-1/2 text-white text-lg font-bold hover:text-blue-600 hover:underline cursor-pointer">{{author.name}}</a>
