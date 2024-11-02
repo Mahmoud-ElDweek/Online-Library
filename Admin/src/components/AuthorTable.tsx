@@ -110,7 +110,7 @@ const AuthorTable = () => {
                     <div className="grid grid-cols-6 gap-3 border-stroke py-3 px-4 dark:border-strokedark sm:grid-cols-10 md:px-6 2xl:px-7.5 table" >
                         <div className="col-span-2 sm:col-span-2 flex items-center">
                             <div className="h-17 w-4/6 xl:w-3/6 mx-auto rounded-md">
-                                <img src={author.image} alt={author.name} className="h-full w-full" />
+                                <img src={author.image} alt={author.name} className="h-full w-full" loading='lazy'/>
                             </div>
                         </div>
                         <p className="col-span-2 sm:col-span-2  text-sm text-black dark:text-white text-ellipsis overflow-hidden max-h-10 self-center pe-4">{author.name}</p>
@@ -141,7 +141,7 @@ const AuthorTable = () => {
                             <h5 className="font-semibold py-4">Details for Author ID: {detailedAuthor._id}</h5>
                             <section className="grid grid-cols-3">
                                 <div>
-                                    <img src={detailedAuthor.image} alt={detailedAuthor.name} className="w-full" />
+                                    <img src={detailedAuthor.image} alt={detailedAuthor.name} className="w-full" loading='lazy'/>
                                 </div>
                                 <div className="col-span-2 ms-10">
                                     <h6 className="font-semibold pb-2 border-b mb-4">

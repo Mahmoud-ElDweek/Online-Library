@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthorService } from '../../services/author/author.service';
 import { SearchFilterBooksService } from '../../services/books/search-filter-books.service';
 import { switchMap } from 'rxjs/operators';
@@ -34,7 +34,9 @@ export class AuthorDetailsComponent implements OnInit {
     private _route: ActivatedRoute,
     private _authorService: AuthorService,
     private _searchService: SearchFilterBooksService,
-    private _myTranslateService :MyTranslateService
+    private _myTranslateService :MyTranslateService,
+    private router: Router,
+
   ) {}
 
   ngOnInit(): void {
@@ -61,6 +63,9 @@ export class AuthorDetailsComponent implements OnInit {
         console.error('Error fetching author details:', err);
         this.errorMessage = 'Failed to load author details';
         this.isLoading = false;
+      },
+      complete: () => {
+        this.router.navigate([`/err404`]); // Navigate to author details page
       }
     });
   }

@@ -16,7 +16,7 @@
                     <li *ngFor="let item of filteredBooks; trackBy: trackByFn" (click)="selectBook(item)">
                         <div class="grid grid-cols-8 gap-3 border-b border-border-light hover:cursor-pointer hover:bg-gray-400 dark:hover:bg-border-dark dark:border-border-dark py-1 items-center bg-light-200 dark:bg-dark-700">
                             <div class="col-span-3 md:col-span-2 lg:col-span-1 h-16 ">
-                                <img [src]="item.coverImage" alt="{{item.title}}" class="h-full mx-auto">
+                                <img [src]="item.coverImage" alt="{{item.title}}" class="h-full mx-auto" loading='lazy'>
                             </div>
                             <div class="col-span-5 md:col-span-6 lg:col-span-7 text-text-primary dark:text-text-forDark">
                                 <p>

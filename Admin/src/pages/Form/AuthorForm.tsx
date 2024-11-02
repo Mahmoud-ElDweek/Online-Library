@@ -216,7 +216,8 @@ const AuthorForm = () => {
                 <div className='col-span-1 w-full'>
                   <img
                     src={previewImage ? previewImage : authorData.image}
-                    alt=""
+                    alt="author image"
+                    loading='lazy'
                   />
                 </div>
               }

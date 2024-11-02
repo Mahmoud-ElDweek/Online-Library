@@ -211,7 +211,8 @@ const CategoryForm = () => {
                 <div className='col-span-1 w-full'>
                   <img
                     src={previewImage ? previewImage : categoryData.image}
-                    alt=""
+                    alt="category image"
+                    loading='lazy'
                   />
                 </div>
               }

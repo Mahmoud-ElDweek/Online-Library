@@ -105,6 +105,7 @@
                   src="../../../assets/images/logo/AndlosiaLogo.png"
                   alt=""
                   class="w-4/5 sm:w-3/5 p-5"
+                  loading='lazy'
                 />
               </div>
               <div
@@ -167,12 +168,14 @@
                     class="w-10 h-10 rounded-full object-cover"
                     [src]="profileImage"
                     alt="User Avatar"
+                    loading='lazy'
                   />
                   }@else{
                   <img
                     class="w-10 h-10 rounded-full object-cover"
                     src="../../../assets/images/blank-profile-picture.webp"
                     alt="User Avatar"
+                    loading='lazy'
                   />
                   }
                 </button>

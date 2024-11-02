@@ -7,7 +7,7 @@
 
       <div class="w-fit order-1">
         <a class="navbar-brand text-gray-900 text-2xl font-extrabold tracking-tight" routerLink="/home">
-          <img src="../../../../assets/images/logo/Andalosia Logo.png" class="h-12 sm:h-10 w-48" alt="" />
+          <img src="../../../../assets/images/logo/Andalosia Logo.png" class="h-12 sm:h-10 w-48" alt="" loading='lazy'/>
         </a>
       </div>
       <div class="w-full order-3 md:order-2">
@@ -47,7 +47,7 @@
                   <li class="flex items-center border-b text-text-primary dark:text-text-forDark border-gray-300 py-2">
                     <div class="cart-img-head ml-2">
                       <a class="cart-img">
-                        <img [src]="item.book.coverImage" alt="Product Image" class="w-16 h-16 object-cover rounded-md" />
+                        <img [src]="item.book.coverImage" alt="Product Image" class="w-16 h-16 object-cover rounded-md" loading='lazy'/>
                       </a>
                     </div>
                     <ul class="content ml-3">

@@ -4,6 +4,7 @@ const Calendar = lazy(() => import('../pages/Calendar'));
 const Chart = lazy(() => import('../pages/Chart'));
 // const FormElements = lazy(() => import('../pages/Form/FormElements'));
 const BookForm = lazy(() => import('../pages/Form/BookForm'));
+const LiveStreamForm = lazy(() => import('../pages/Form/LiveStreamForm'));
 const AuthorForm = lazy(() => import('../pages/Form/AuthorForm'));
 const CategoryForm = lazy(() => import('../pages/Form/CategoryForm'));
 const UserForm = lazy(() => import('../pages/Form/UserFrom'));
@@ -14,8 +15,11 @@ const Settings = lazy(() => import('../pages/Settings'));
 const AllOrders = lazy(() => import('../pages/AllData/AllOrders'));
 const AllBooks = lazy(() => import('../pages/AllData/AllBooks'));
 const AllUsers = lazy(() => import('../pages/AllData/AllUsers'));
+const AllLiveStreams = lazy(() => import('../pages/AllData/AllLiveStreams'));
 const Alerts = lazy(() => import('../pages/UiElements/Alerts'));
 const Buttons = lazy(() => import('../pages/UiElements/Buttons'));
+
+
 
 const coreRoutes = [
   {
@@ -49,14 +53,14 @@ const coreRoutes = [
     component: CategoryForm,
   },
   {
-    path: '/forms/category-form/:id',
-    title: 'Category Form',
-    component: CategoryForm,
-  },
-  {
     path: "/forms/user-form",
     title: "User Form",
     component: UserForm,
+  },
+  {
+    path: "/forms/livestream-form/:id?",
+    title: "Live Stream Form",
+    component: LiveStreamForm,
   },
   // {
   //   path: "/forms/form-layout",
@@ -77,6 +81,11 @@ const coreRoutes = [
     path: "/books",
     title: "All Books",
     component: AllBooks,
+  },
+  {
+    path: "/stream-events",
+    title: "All Live Streams",
+    component: AllLiveStreams,
   },
   // {
   //   path: "/tables",

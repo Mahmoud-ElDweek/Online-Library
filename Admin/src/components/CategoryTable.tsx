@@ -99,7 +99,7 @@ const CategoryTable = () => {
                         <div className="card-container">
 
                                 <div className="rounded-md p-2">
-                                    <img src={category.image} alt={category.name} className='h-30 w-full'/>
+                                    <img src={category.image} alt={category.name} className='h-30 w-full' loading='lazy'/>
                                 </div>
                             <div className="content p-2">
                                 <p className="text-center text-black dark:text-white py-4">{category.name}</p>
@@ -126,7 +126,7 @@ const CategoryTable = () => {
                                 <h5 className="font-semibold py-4">Details for Category ID: {detailedCategory._id}</h5>
                                 <section className="grid grid-cols-3">
                                     <div>
-                                        <img src={detailedCategory.image} alt={detailedCategory.name} className="w-full" />
+                                        <img src={detailedCategory.image} alt={detailedCategory.name} className="w-full" loading='lazy'/>
                                     </div>
                                     <div className="col-span-2 ms-10">
                                         <h6 className="py-10 font-semibold pb-2 border-b mb-4">

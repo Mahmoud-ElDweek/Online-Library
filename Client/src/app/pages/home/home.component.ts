@@ -1,5 +1,4 @@
 import { Component, Inject, OnInit, PLATFORM_ID } from "@angular/core";
-import { CardComponent } from "../../components/card/card.component";
 import { CallSectionComponent } from "../../components/call-section/call-section.component";
 import { BannerSectionComponent } from "../../components/banner-section/banner-section.component";
 import { ShippingInfoComponent } from "../../components/shipping-info/shipping-info.component";
@@ -29,7 +28,6 @@ import { AuthourizationService } from "../../services/users/authourization.servi
   selector: "app-home",
   standalone: true,
   imports: [
-    CardComponent,
     CallSectionComponent,
     BannerSectionComponent,
     ShippingInfoComponent,

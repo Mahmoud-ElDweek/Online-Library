@@ -150,8 +150,8 @@ const UserFrom = () => {
   };
   return (
     <>
-      <Breadcrumb  pageName="Edit User info" />
-     
+      <Breadcrumb  pageName="Edit User" />
+      <h1 className="font-extrabold text-3xl pb-5">Edit User Informations</h1>
       <form onSubmit={handleSubmit}>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">

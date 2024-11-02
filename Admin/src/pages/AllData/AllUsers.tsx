@@ -72,7 +72,7 @@ const AllUsers = () => {
     const handleDelete = async (userId: string) => {
         try {
             const token = getToken();
-           const res= await axios.delete(`http://localhost:3000/user-settings/admin/users/${userId}`, { 'headers': { 'token': token || "" } });
+           const res= await axios.delete(`${apiUrl}/user-settings/admin/users/${userId}`, { 'headers': { 'token': token || "" } });
            if (res.data.message === "Deleted Success") {
             setUsers(users.filter(user => user._id !== userId));
            
@@ -117,7 +117,7 @@ const AllUsers = () => {
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)} // Update search term on input change
                     className="
-                    input input-bordered w-125 
+                    input input-bordered w-full md:w-125 
                     bg-white dark:text-stroke border-gray-300
                     dark:bg-strokedark dark:text-gray-200 dark:placeholder-gray-400 dark:border-gray-600
                     transition-all duration-300 ease-in-out 
@@ -129,17 +129,17 @@ const AllUsers = () => {
             </div>
 
 
-            <div className="grid grid-cols-10 border-t border-stroke py-4.5 px-4 dark:border-strokedark sm:grid-cols-10 md:px-6 2xl:px-7.5">
-                <div className="col-span-1 flex items-center">
+            <div className="grid grid-cols-6 sm:grid-cols-10 border-t border-stroke py-4.5 px-4 dark:border-strokedark md:px-6 2xl:px-7.5">
+                <div className="hidden col-span-1 md:block items-center">
                     <p className="font-medium">image</p>
                 </div>
-                <div className="col-span-2 hidden items-center sm:flex">
+                <div className="col-span-2 sm:col-span-3 md:col-span-2 items-center flex">
                     <p className="font-medium">Name</p>
                 </div>
                 <div className="col-span-1 flex items-center">
                     <p className="font-medium">role</p>
                 </div>
-                <div className="col-span-3 flex items-center">
+                <div className="col-span-3 hidden items-center sm:flex">
                     <p className="font-medium">email</p>
                 </div>
 
@@ -186,7 +186,7 @@ const AllUsers = () => {
                     <h3 className="font-bold text-lg">User Details</h3>
                     <section className="grid grid-cols-3">
                         <div>
-                            <img src={selectedUser.profilePic} alt={selectedUser.fName} className="w-full" />
+                            <img src={selectedUser.profilePic} alt={selectedUser.fName} className="w-full" loading='lazy'/>
                         </div>
                         <div className="col-span-2 ms-10">
                             <h6 className="font-semibold pb-2 border-b mb-4">

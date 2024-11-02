@@ -63,6 +63,7 @@ const DetailsModal: React.FC<DetailsModalProps> = ({
                   src={item.coverImage}
                   alt={item.title}
                   className="w-20 h-20 object-cover rounded-lg shadow-md mb-2"
+                  loading='lazy'
                 />
                 <div className="text-center">
                   <div className="font-medium text-gray-900">{item.title}</div>

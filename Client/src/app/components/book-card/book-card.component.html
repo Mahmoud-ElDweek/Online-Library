@@ -12,7 +12,7 @@
       <span class="absolute top-6 left-0 bg-green-600 text-gray-100 py-1 ps-1.5 pe-4 rounded-e-lg z-50">Book In Stock</span>
     } -->
     <div
-      class="relative overflow-hidden bg-light-300 dark:bg-dark-700 img-holder"
+      class="relative overflow-hidden bg-light-300 dark:bg-dark-700 img-holder" loading='lazy'
     >
       <div style="width: 80%; margin: auto" class="py-4">
         @if (bookCoverImg) {
@@ -26,6 +26,7 @@
           class="block mx-auto lg:w-40 h-60 dark:text-white"
           src="assets/images/bookImageNotFound.png"
           [alt]="bookTitle"
+          loading='lazy'
         />
         }
       </div>

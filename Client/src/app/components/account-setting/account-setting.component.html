@@ -14,18 +14,21 @@
             class="object-cover w-40 h-40 p-1 rounded-full ring-2 ring-indigo-300 dark:ring-indigo-500"
             [src]="profilePicture"
             alt="Bordered avatar"
+            loading='lazy'
           />
           }@else if (profilePictureFromDB) {
           <img
             class="object-cover w-40 h-40 p-1 rounded-full ring-2 ring-indigo-300 dark:ring-indigo-500"
             [src]="profilePictureFromDB"
             alt="Bordered avatar"
+            loading='lazy'
           />
           } @else {
           <img
             class="object-cover w-40 h-40 p-1 rounded-full ring-2 ring-indigo-300 dark:ring-indigo-500"
             src="../../../assets/images/blank-profile-picture.webp"
             alt="Bordered avatar"
+            loading='lazy'
           />
           }
           <label

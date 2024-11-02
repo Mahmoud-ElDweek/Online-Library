@@ -1,6 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import LogoDark from "../../images/logo/logo-dark.svg";
-import Logo from "../../images/logo/Andlosia Logo.png";
+import Logo from "../../images/logo/Andalosia-Logo.png";
 import { useState } from "react";
 import { apiUrl } from "../../utils/apiUrl";
 
@@ -55,13 +54,14 @@ const SignIn = () => {
   };
   return (
     <>
-      <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
-        <div className="flex flex-wrap items-center">
+    
+      <div className="rounded-sm border border-stroke shadow-default dark:border-strokedark dark:bg-boxdark min-h-screen ">
+        <div className="flex flex-wrap items-center mt-28">
           <div className="hidden w-full xl:block xl:w-1/2">
             <div className="py-17.5 px-26 text-center">
-              <Link className="mb-5.5 inline-block" to="/">
-                <img src={Logo} alt="Logo" />
-              </Link>
+              <div className="mb-5.5 inline-block">
+                <img src={Logo} alt="Logo" loading='lazy'/>
+              </div>
 
               <p className="2xl:px-20">Online Book Store.</p>
 

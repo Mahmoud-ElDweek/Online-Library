@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import Breadcrumb from "../../components/Breadcrumb";
@@ -25,8 +26,8 @@ const BookForm = () => {
     stock: "",
     price: "",
     pages: "",
-    author: "",
-    category: "",
+    author: null,
+    category: null,
     publishedDate: "",
     coverImage: null,
     description: "",
@@ -38,19 +39,19 @@ const BookForm = () => {
       stock: "",
       price: "",
       pages: "",
-      author: "",
-      category: "",
+      author: null,
+      category: null,
       publishedDate: "",
       coverImage: null,
       description: "",
-    })
-  }
-  const navigate = useNavigate()
+    });
+  };
+  const navigate = useNavigate();
 
   const handleClearBtn = () => {
-    resetForm()
-    navigate(`/forms/book-form`)
-  }
+    resetForm();
+    navigate(`/forms/book-form`);
+  };
   const [Errors, setErrors] = useState({
     titleError: "",
     stockError: "",
@@ -69,25 +70,23 @@ const BookForm = () => {
         bookData.title.length === 0
           ? "Book Title is required"
           : bookData.title.length < 3
-            ? "Title minimum length 3"
-            : bookData.title.length > 100
-              ? "Title maximum length 100"
-              : "",
-      stockError:
-        bookData.stock == ""
-          ? "Stock field is Required" : "",
+          ? "Title minimum length 3"
+          : bookData.title.length > 100
+          ? "Title maximum length 100"
+          : "",
+      stockError: bookData.stock == "" ? "Stock field is Required" : "",
       priceError:
         bookData.price == ""
           ? "Stock field is Required"
           : +bookData.price < 0
-            ? "Price must be a positive number"
-            : "",
+          ? "Price must be a positive number"
+          : "",
       pagesError:
         bookData.pages == ""
           ? "Stock field is Required"
           : +bookData.pages < 0
-            ? "Page count must be a positive number"
-            : "",
+          ? "Page count must be a positive number"
+          : "",
       authorError: !bookData.author ? "Select author for this book" : "",
       categoryError: !bookData.category ? "Select category for this book" : "",
       publishedDateError: !bookData.publishedDate
@@ -100,10 +99,10 @@ const BookForm = () => {
         bookData.description.length === 0
           ? "Book description is required"
           : bookData.description.length < 10
-            ? "Book description minimum length 10"
-            : bookData.description.length > 500
-              ? "Book description maximum length 500"
-              : "",
+          ? "Book description minimum length 10"
+          : bookData.description.length > 500
+          ? "Book description maximum length 500"
+          : "",
     };
 
     setErrors(newErrors);
@@ -111,7 +110,6 @@ const BookForm = () => {
   };
 
   const getToken = () => localStorage.getItem("token");
-
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
@@ -227,7 +225,7 @@ const BookForm = () => {
           });
         })
         .finally(() => {
-          setIsLoading(false)
+          setIsLoading(false);
         });
     } else {
       formData.append("title", bookData.title);
@@ -253,7 +251,7 @@ const BookForm = () => {
             timer: 2000,
           });
           console.log(res);
-          resetForm()
+          resetForm();
         })
         .catch((err) => {
           Swal.fire({
@@ -266,8 +264,8 @@ const BookForm = () => {
           console.log(err.response.data.message);
         })
         .finally(() => {
-          setIsLoading(false)
-          resetForm()
+          setIsLoading(false);
+          resetForm();
         });
     }
   };
@@ -289,13 +287,19 @@ const BookForm = () => {
   };
 
   if (loading) {
-    return <div><LoadingSpinner color="white" /></div>;
+    return (
+      <div>
+        <LoadingSpinner color="white" />
+      </div>
+    );
   }
 
   return (
     <>
       <Breadcrumb pageName="Book Form" />
-      <h1 className="font-extrabold text-3xl pb-5">{id ? "Update Book" : "Add New Book"}</h1>
+      <h1 className="font-extrabold text-3xl pb-5">
+        {id ? "Update Book" : "Add New Book"}
+      </h1>
       <form onSubmit={handleSubmit}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div className="relative">
@@ -371,10 +375,9 @@ const BookForm = () => {
             </div>
             <div className="flex flex-col gap-5.5 p-6.5">
               <span>
-                Current Author:{" "}
+                Current Author:
                 <span className="text-lg font-semibold">
-                  {" "}
-                  {bookData.author?.name}{" "}
+                  {bookData.author?.name}
                 </span>
               </span>
               <div>
@@ -404,9 +407,8 @@ const BookForm = () => {
             </div>
             <div className="flex flex-col gap-5.5 p-6.5">
               <span>
-                Current Category:{" "}
+                Current Category:
                 <span className="text-lg font-semibold">
-                  {" "}
                   {bookData.category?.name}
                 </span>
               </span>
@@ -443,7 +445,7 @@ const BookForm = () => {
               <span className="text-meta-7 absolute bottom-0 left-8">
                 {Errors.publishedDateError}
               </span>
-            )}{" "}
+            )}
             {/* Display error under field */}
           </div>
           {/* Book Cover Image */}
@@ -459,7 +461,8 @@ const BookForm = () => {
                 <div className="col-span-1 w-full">
                   <img
                     src={previewImage ? previewImage : bookData.coverImage}
-                    alt=""
+                    alt="book image"
+                    loading='lazy'
                   />
                 </div>
               )}
@@ -526,15 +529,29 @@ const BookForm = () => {
               ? "Update Book"
               : "Create Book"}
         </button> */}
-        <div className='flex'>
-
-          {id &&
-            <button className='btn btn-primary mt-4 px-8 text-xl block' onClick={() => handleClearBtn()}>Clear All Feilds</button>
-          }
+        <div className="flex">
+          {id && (
+            <button
+              className="btn btn-primary mt-4 px-8 text-xl block"
+              onClick={() => handleClearBtn()}
+            >
+              Clear All Feilds
+            </button>
+          )}
           <button
-            className={isLoading ? 'btn btn-primary ms-auto mt-4 px-8 text-xl block cursor-progress' : 'btn btn-primary ms-auto mt-4 px-8 text-xl block'}
+            className={
+              isLoading
+                ? "btn btn-primary ms-auto mt-4 px-8 text-xl block cursor-progress"
+                : "btn btn-primary ms-auto mt-4 px-8 text-xl block"
+            }
           >
-            {isLoading ? <LoadingSpinner color='white' /> : (id ? 'Update Book' : 'Create Book')}
+            {isLoading ? (
+              <LoadingSpinner color="white" />
+            ) : id ? (
+              "Update Book"
+            ) : (
+              "Create Book"
+            )}
           </button>
         </div>
       </form>

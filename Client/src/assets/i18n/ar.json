@@ -260,7 +260,7 @@
         "Password is required.":"كلمة المرور مطلوبة.",
         "Must contain at least:":"يجب أن يحتوي على الأقل:",
         "One number.":"رقم واحد.",
-        "One capital character.":"حرف كبير واحد.",
+        "One capital character.":"حرف واحد كبير وأخر صغير.",
         "Use 8 characters or more for your password.":"استخدم 8 أحرف أو أكثر لكلمة المرور الخاصة بك.",
         "Confirm Password *":"تأكيد كلمة المرور *",
         "Field is required.":"الحقل مطلوب.",

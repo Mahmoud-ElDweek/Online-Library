@@ -18,13 +18,13 @@ export class StreamEventComponent implements OnInit {
   allOldStreams: Array<StreamInterface> = [];
   page: number = 1;
   limit: number = 5;
-  currentStream: StreamInterface | null = null; // تخزين البث الحالي المحدد
+  currentStream: StreamInterface | null = null;
 
   constructor(
     private _allStreamEventService: AllStreamEventService,
     private _domSanitizer: DomSanitizer,
     private _myTranslateService: MyTranslateService,
-    private cdr: ChangeDetectorRef // لإجبار Angular على التحقق من التغييرات
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -36,10 +36,9 @@ export class StreamEventComponent implements OnInit {
       next: (res) => {
         this.allOldStreams = res.data;
         if (this.allOldStreams.length > 0) {
-          // تعيين البث الحالي إلى آخر بث بشكل افتراضي
           this.currentStream = this.allOldStreams[this.allOldStreams.length - 1];
         }
-        this.cdr.markForCheck(); // التأكد من تحديث العرض
+        this.cdr.markForCheck(); 
         console.log(res, "dataaaaaaaaa");
       },
       error: (err) => {
@@ -51,10 +50,9 @@ export class StreamEventComponent implements OnInit {
     });
   }
 
-  // تحديث البث الحالي عند النقر على بث
   onStreamSelect(stream: StreamInterface): void {
     this.currentStream = stream;
-    this.cdr.markForCheck(); // التأكد من تحديث العرض
+    this.cdr.markForCheck();
   }
 
   getSanitizedUrl(streamUrlCode: any): SafeResourceUrl {
